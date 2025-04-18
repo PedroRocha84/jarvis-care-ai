@@ -3,15 +3,12 @@ package com.jarviscare.you.controllers.web;
 import com.jarviscare.you.model.User;
 import com.jarviscare.you.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/register")
+@RequestMapping("/")
 public class UserController {
 
     private UserService userService;
@@ -23,16 +20,21 @@ public class UserController {
     }
 
     // GET /users - Return all users as JSON
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET, path = {"/users", "/users/"})
     public List<User> getAllUsers() {
         return userService.getUsers();
     }
 
     // GET /users/{username} - Get a specific user
-    @GetMapping("/{username}")
+    @RequestMapping(method = RequestMethod.GET, path = "/users/{username}")
     public User getUserByUsername(@PathVariable String username) {
         return userService.getUserByEmail(username);
     }
 
-
+    // POST /users - Add a new user via JSON
+    @PostMapping
+    public String addUser(@RequestBody User user) {
+        userService.add(user);
+        return "User added successfully!";
+    }
 }

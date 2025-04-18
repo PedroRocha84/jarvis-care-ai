@@ -6,7 +6,7 @@
     <artifactId>JavaBank</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>JavaBank</name>
+    <name>Jarvis-Care-Ai</name>
     <packaging>war</packaging>
 
     <properties>
@@ -179,7 +179,7 @@
     </repositories>
 
     <build>
-        <finalName>javabank</finalName>
+        <finalName>jarvis-care-ai</finalName>
 
         <plugins>
             <plugin>
@@ -208,7 +208,7 @@
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
                     <server>tomcat</server>
-                    <path>/javabank</path>
+                    <path>/jarvis-care-ai</path>
                 </configuration>
             </plugin>
         </plugins>
