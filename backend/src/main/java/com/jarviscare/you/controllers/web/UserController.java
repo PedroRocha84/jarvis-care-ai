@@ -32,7 +32,7 @@ public class UserController {
     }
 
     // POST /users - Add a new user via JSON
-    @PostMapping
+    @PostMapping(path = {"/users", "/users/"})
     public String addUser(@RequestBody User user) {
         userService.add(user);
         return "User added successfully!";

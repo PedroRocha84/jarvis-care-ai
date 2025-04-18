@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.codeforall.online</groupId>
-    <artifactId>JavaBank</artifactId>
+    <groupId>com.jarviscare.you</groupId>
+    <artifactId>Jarvis</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <name>Jarvis-Care-Ai</name>
@@ -153,6 +153,14 @@
             <artifactId>spring-ai-tika-document-reader</artifactId>
         </dependency>
 
+        <!-- Login security -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>
@@ -208,7 +216,7 @@
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
                     <server>tomcat</server>
-                    <path>/jarvis-care-ai</path>
+                    <path>/jarvis</path>
                 </configuration>
             </plugin>
         </plugins>

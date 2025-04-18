@@ -1,6 +1,7 @@
 package com.jarviscare.you.services;
 
 import com.jarviscare.you.model.User;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,11 +11,24 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private List<User> users = new ArrayList<User>();
+    private int id = 1;
 
+    private List<User> users = new ArrayList<User>();
 
     @Override
     public void add(User user) {
+        boolean emailExists = users.stream()
+                .anyMatch(u->u.getEmail().equalsIgnoreCase(user.getEmail()));
+
+        if(emailExists) {
+            throw new RuntimeException("User already exists, please choose another email");
+        }
+
+        user.setId(id++);
+
+        String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        user.setPassword(hashedPassword);
+
         users.add(user);
     }
 
@@ -31,12 +45,14 @@ public class UserServiceImpl implements UserService {
                 .orElse(null);
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/{email}")
     public User getUserByEmail(String email) {
         return users.stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
     }
+
+
 
 }
