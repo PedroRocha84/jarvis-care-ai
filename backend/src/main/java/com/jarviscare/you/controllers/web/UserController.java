@@ -1,5 +1,6 @@
 package com.jarviscare.you.controllers.web;
 
+import com.jarviscare.you.model.Medicine;
 import com.jarviscare.you.model.User;
 import com.jarviscare.you.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +38,12 @@ public class UserController {
         userService.add(user);
         return "User added successfully!";
     }
+
+    //GET /user/{username}/medicine
+    @RequestMapping(method = RequestMethod.GET, path = {"/user/{username}/medicine"})
+    public List<Medicine> getListOfMedicineByUsername(@PathVariable String username) {
+        return userService.getListUserMedicines();
+    }
+
+
 }

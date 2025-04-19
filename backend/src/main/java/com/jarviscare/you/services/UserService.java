@@ -1,5 +1,6 @@
 package com.jarviscare.you.services;
 
+import com.jarviscare.you.model.Medicine;
 import com.jarviscare.you.model.User;
 
 import java.util.List;
@@ -18,4 +19,9 @@ public interface UserService {
     User getUserById(int id);
 
     User getUserByEmail(String email);
+
+    Medicine addUserMedicine(Medicine medicine, User user);
+
+    List<Medicine> getListUserMedicines();
+
 }

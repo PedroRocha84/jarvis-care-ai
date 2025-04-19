@@ -2,6 +2,9 @@ package com.jarviscare.you.model;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class User {
 
@@ -15,6 +18,10 @@ public class User {
     private String city;
     private String zipCode;
     private String country;
+
+    private Medicine medicine;
+    private List<Medicine> medicines = new ArrayList<>();
+
 
     public int getId() {
         return id;
@@ -92,5 +99,21 @@ public class User {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Medicine getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(Medicine medicine) {
+        this.medicine = medicine;
+    }
+
+    public List<Medicine> getMedicines() {
+        return medicines;
+    }
+
+    public void setMedicines(List<Medicine> medicines) {
+        this.medicines = medicines;
     }
 }
