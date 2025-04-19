@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
 
         user.setId(id++);
 
-        String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-        user.setPassword(hashedPassword);
+        String passHashed = PasswordManager.hashPassword(user.getPassword());
+        user.setPassword(passHashed);
 
         users.add(user);
     }

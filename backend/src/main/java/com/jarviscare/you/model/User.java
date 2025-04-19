@@ -13,7 +13,7 @@ public class User {
     private String phone;
     private String address;
     private String city;
-    private String state;
+    private String zipCode;
     private String country;
 
     public int getId() {
@@ -80,12 +80,12 @@ public class User {
         this.city = city;
     }
 
-    public String getState() {
-        return state;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setZipCode(String state) {
+        this.zipCode = state;
     }
 
     public String getCountry() {
