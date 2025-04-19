@@ -55,4 +55,8 @@ function handlePopState(data) {
     initializeController(route.controller);
 }
 
-export default { start };
+
+export default { 
+    start,
+    navigate
+};

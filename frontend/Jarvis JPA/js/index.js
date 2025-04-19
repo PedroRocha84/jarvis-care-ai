@@ -7,14 +7,12 @@ addEventListener('DOMContentLoaded', () => {
 
 function init() {
     const app = document.getElementById('app');
-
-    const header = createHeader();
     const main = document.createElement('main');
     main.id = 'main-content';
-
-    app.appendChild(header);
     app.appendChild(main);
 }
+
+
 
 function createHeader() {
     const header = document.createElement('header');
