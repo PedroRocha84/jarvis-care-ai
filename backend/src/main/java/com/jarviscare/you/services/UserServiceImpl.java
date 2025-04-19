@@ -1,87 +1,92 @@
 package com.jarviscare.you.services;
 
+import com.jarviscare.you.exceptions.UserNotFoundException;
 import com.jarviscare.you.model.Medicine;
 import com.jarviscare.you.model.User;
-
-import jakarta.persistence.Access;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
+    private Map<Integer, User> users;
+    private MedicineServiceImpl medicineService;
 
-    private int id = 1;
+    public UserServiceImpl() { users = new HashMap<>(); }
 
-    private List<User> users = new ArrayList<User>();
+    /***
+     * Get the user with the id
+     * @param id the users' id
+     * @return user
+     * @throws UserNotFoundException
+     */
+    @Override
+    public User get(int id) throws UserNotFoundException {
+        if(!users.containsKey(id)){
+            throw new UserNotFoundException();
+        }
+        return users.get(id);
+    }
 
-    private Map<User, Medicine> userMedicines = new HashMap<User, Medicine>();
+    /**
+     * Check if the user exists
+     * @param id the users' id
+     * @return true if the user exists
+     */
+    public boolean userExists(Integer id) { return users.containsKey(id); }
 
-    private MedicineServiceImpl medicineServiceImpl = new MedicineServiceImpl();
+    private int getNextId() {
+        return users.isEmpty() ? 1: Collections.max(users.keySet()) + 1;
+    }
 
+    /***
+     * @see UserService#list
+     * @return a list of users
+     */
+    @Override
+    public List<User> list() {
+        return new ArrayList<>(users.values());
+    }
 
+    /***
+     * @see UserService#list()
+     * @param user the user to add
+     */
     @Override
     public void add(User user) {
-        boolean emailExists = users.stream()
-                .anyMatch(u -> u.getEmail().equalsIgnoreCase(user.getEmail()));
 
-        if (emailExists) {
-            throw new RuntimeException("User already exists, please choose another email");
+        if(!userExists(user.getId())){
+            user.setId(getNextId());
         }
-
-        user.setId(id++);
 
         String passHashed = PasswordManager.hashPassword(user.getPassword());
         user.setPassword(passHashed);
 
-        users.add(user);
+        users.put(user.getId(), user);
+
     }
 
-    @Override
-    public List<User> getUsers() {
-        return new ArrayList<>(users);
-    }
+  public void addMedicine(Integer id, Medicine medicine){
+        User user = null;
 
-    @Override
-    public User getUserById(int id) {
-        return users.stream()
-                .filter(user -> user.getId() == id)
-                .findFirst()
-                .orElse(null);
-    }
+      try {
+          user = get(id);
+      } catch (UserNotFoundException e) {
+          System.out.println("ALERT: Medicine already exists, please choose another medicine");
+          System.out.println(e.getMessage());
+      }
 
-    @GetMapping("/{email}")
-    public User getUserByEmail(String email) {
-        return users.stream()
-                .filter(user -> user.getEmail().equals(email))
-                .findFirst()
-                .orElse(null);
-    }
-
-
-    @Override
-    public Medicine addUserMedicine(Medicine medicine, User user) {
-        if (medicineServiceImpl.getMedicine().contains(medicine)) {
-            System.out.println("ALERT: Medicine already exists, please choose another medicine");
-        }
-        user.getMedicines().add(medicine);
-        return medicine;
-    }
-
-    @Override
-    public List<Medicine> getListUserMedicines() {
-
-        userMedicines.get(user);
-        return new ArrayList<>(userMedicines.values());
-    }
+      medicineService.addMedicine(medicine);
+      user.addMedicine(medicine);
+  }
 
     @Autowired
-    public MedicineServiceImpl getMedicineServiceImpl() {
-        return medicineServiceImpl;
+    public void setMedicineService(MedicineServiceImpl medicineService) {
+        this.medicineService = medicineService;
     }
+
+    public void setUsers(Map<Integer, User> users) { this.users = users;}
+
+
 }

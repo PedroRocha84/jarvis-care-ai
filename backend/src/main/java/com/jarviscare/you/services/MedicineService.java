@@ -8,6 +8,7 @@ public interface MedicineService {
 
     void addMedicine(Medicine medicine);
 
-    List<Medicine> getMedicine();
+    Medicine get(int id);
+
 
 }

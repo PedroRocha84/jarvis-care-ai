@@ -3,25 +3,35 @@ package com.jarviscare.you.services;
 import com.jarviscare.you.model.Medicine;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MedicineServiceImpl implements MedicineService {
 
-    private final List<Medicine> medicineList = new ArrayList<>();
+    private Map<Integer, Medicine> medicineMap;
 
-    private int id = 1;
+    /***
+     * Initializes the MedicineServiceImpl with a new {@code hashmap}
+     */
+    public MedicineServiceImpl() { medicineMap = new HashMap<>(); }
 
+    /***
+     * Add new medicine
+     * @param medicine the medicine
+     */
     @Override
     public void addMedicine(Medicine medicine) {
-        medicine.setMedicineId(id++);
-        medicineList.add(medicine);
+        if(medicine.getMedicineId() == null){
+            medicine.setMedicineId(getNextId());
+        }
 
-    }
+        medicineMap.put(medicine.getMedicineId(), medicine);
+   }
+
+    private Integer getNextId() { return medicineMap.isEmpty() ? 1 : Collections.max(medicineMap.keySet()) + 1;}
 
     @Override
-    public List<Medicine> getMedicine() {
-        return new ArrayList<>(medicineList);
+    public Medicine get(int medicineId) {
+        return medicineMap.get(medicineId);
     }
 }

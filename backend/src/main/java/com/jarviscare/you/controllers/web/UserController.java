@@ -1,15 +1,15 @@
 package com.jarviscare.you.controllers.web;
 
-import com.jarviscare.you.model.Medicine;
 import com.jarviscare.you.model.User;
 import com.jarviscare.you.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class UserController {
 
     private UserService userService;
@@ -23,27 +23,14 @@ public class UserController {
     // GET /users - Return all users as JSON
     @RequestMapping(method = RequestMethod.GET, path = {"/users", "/users/"})
     public List<User> getAllUsers() {
-        return userService.getUsers();
-    }
-
-    // GET /users/{username} - Get a specific user
-    @RequestMapping(method = RequestMethod.GET, path = "/users/{username}")
-    public User getUserByUsername(@PathVariable String username) {
-        return userService.getUserByEmail(username);
+        return userService.list();
     }
 
     // POST /users - Add a new user via JSON
-    @PostMapping(path = {"/register", "/register/"})
-    public String addUser(@RequestBody User user) {
+    @RequestMapping(method = RequestMethod.POST, path = {"/register", "/register/"})
+    public ResponseEntity<String> addUser (@RequestBody User user) {
         userService.add(user);
-        return "User added successfully!";
+        return ResponseEntity.ok("User added successfully");
     }
-
-    //GET /user/{username}/medicine
-    @RequestMapping(method = RequestMethod.GET, path = {"/user/{username}/medicine"})
-    public List<Medicine> getListOfMedicineByUsername(@PathVariable String username) {
-        return userService.getListUserMedicines();
-    }
-
 
 }

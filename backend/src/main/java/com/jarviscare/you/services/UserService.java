@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface UserService {
 
+    User get(int userId) throws Exception;
+
     /**
      * Add a given user to customer list
      * @param user the user to add
@@ -14,14 +16,12 @@ public interface UserService {
      */
     void add(User user);
 
-    List<User> getUsers();
+    /***
+     * List all users
+     * @return a list of users
+     */
 
-    User getUserById(int id);
+    List<User> list();
 
-    User getUserByEmail(String email);
-
-    Medicine addUserMedicine(Medicine medicine, User user);
-
-    List<Medicine> getListUserMedicines();
 
 }

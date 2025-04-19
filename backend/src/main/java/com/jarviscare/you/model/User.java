@@ -19,34 +19,68 @@ public class User {
     private String zipCode;
     private String country;
 
-    private Medicine medicine;
-    private List<Medicine> medicines = new ArrayList<>();
+    private List<Medicine> medicines;
 
+    /**
+     * Initializes a new {@code User} instance
+     */
+    public User(){ medicines = new ArrayList<>();}
 
-    public int getId() {
+    public void addMedicine(Medicine medicine){
+        medicines.add(medicine);
+    }
+
+    /**
+     * Get the user id
+     * @return the user id
+     */
+    public Integer getId() {
         return id;
     }
 
+    /**
+     * Set the user id
+     * @param id the user id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Get the user first name
+     * @return the user first name
+     */
     public String getFirstname() {
         return firstname;
     }
 
+    /**
+     * Set the user first name
+     * @param firstname
+     */
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
-
+    /**
+     * Get the user last name
+     * @return the user last name
+     */
     public String getLastname() {
         return lastname;
     }
 
+    /***
+     * Set the user last name
+     * @param lastname
+     */
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
+    /***
+     * Get the user email
+     * @return
+     */
     public String getEmail() {
         return email;
     }
@@ -99,14 +133,6 @@ public class User {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public Medicine getMedicine() {
-        return medicine;
-    }
-
-    public void setMedicine(Medicine medicine) {
-        this.medicine = medicine;
     }
 
     public List<Medicine> getMedicines() {
