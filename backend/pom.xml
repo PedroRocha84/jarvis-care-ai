@@ -208,7 +208,7 @@
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
                     <server>tomcat</server>
-                    <path>/jarvis-care-ai</path>
+                    <path>/jarvis</path>
                 </configuration>
             </plugin>
         </plugins>
