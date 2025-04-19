@@ -37,4 +37,6 @@ public class UserController {
         userService.add(user);
         return "User added successfully!";
     }
+
+
 }
