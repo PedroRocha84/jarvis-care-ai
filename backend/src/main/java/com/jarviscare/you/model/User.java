@@ -88,9 +88,7 @@ public class User {
         this.zipCode = state;
     }
 
-    public String getCountry() {
-        return country;
-    }
+    public String getCountry() {return country;}
 
     public void setCountry(String country) {
         this.country = country;
