@@ -1,7 +1,7 @@
 package com.jarviscare.you.services;
 
 import com.jarviscare.you.model.User;
-import org.mindrot.jbcrypt.BCrypt;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
