@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface MedicineService {
 
-    void addMedication(Medicine medicine);
+    void addMedicine(Medicine medicine);
 
-    List<Medicine> getMedications();
+    List<Medicine> getMedicine();
 
 }

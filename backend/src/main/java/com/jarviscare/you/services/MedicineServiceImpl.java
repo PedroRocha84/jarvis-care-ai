@@ -14,14 +14,14 @@ public class MedicineServiceImpl implements MedicineService {
     private int id = 1;
 
     @Override
-    public void addMedication(Medicine medicine) {
+    public void addMedicine(Medicine medicine) {
         medicine.setMedicineId(id++);
         medicineList.add(medicine);
 
     }
 
     @Override
-    public List<Medicine> getMedications() {
+    public List<Medicine> getMedicine() {
         return new ArrayList<>(medicineList);
     }
 }

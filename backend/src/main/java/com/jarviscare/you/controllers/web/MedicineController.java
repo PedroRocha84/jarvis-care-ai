@@ -20,13 +20,12 @@ public class MedicineController {
 
     @RequestMapping(method = RequestMethod.GET, path = {"/", ""})
     public List<Medicine> getMedication(){
-      return medicineService.getMedications();
+      return medicineService.getMedicine();
   }
 
-    @PostMapping(path = {"/add"})
+    @PostMapping(path = {"/add", "/add/"})
     public Medicine addMedication(@RequestBody Medicine medicine) {
-      medicineService.addMedication(medicine);
+      medicineService.addMedicine(medicine);
       return medicine;
     }
-
 }
