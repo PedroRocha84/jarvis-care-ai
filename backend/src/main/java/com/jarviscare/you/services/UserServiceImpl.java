@@ -67,7 +67,23 @@ public class UserServiceImpl implements UserService {
 
     }
 
-  public void addMedicine(Integer id, Medicine medicine){
+    @Override
+    public void update(User user) {
+
+        user.setId(user.getId());
+        user.setFirstname(user.getFirstname());
+        user.setLastname(user.getLastname());
+        user.setEmail(user.getEmail());
+        user.setPassword(PasswordManager.hashPassword(user.getPassword()));
+        user.setPhone(user.getPhone());
+        user.setAddress(user.getAddress());
+        user.setCity(user.getCity());
+        user.setZipCode(user.getZipCode());
+        user.setCountry(user.getCountry());
+        users.put(user.getId(), user);
+    }
+
+    public void addMedicine(Integer id, Medicine medicine){
         User user = null;
 
       try {

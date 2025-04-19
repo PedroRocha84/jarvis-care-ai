@@ -10,11 +10,17 @@ public interface UserService {
     User get(int userId) throws Exception;
 
     /**
-     * Add a given user to customer list
+     * Add a given user to user list
      * @param user the user to add
      * @return the user
      */
     void add(User user);
+
+    /***
+     * Update a given user
+     * @param user the user that will be changed
+     */
+    void update(User user);
 
     /***
      * List all users
