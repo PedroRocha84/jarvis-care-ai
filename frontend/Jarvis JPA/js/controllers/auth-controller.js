@@ -1,4 +1,4 @@
-import { renderSignIn, renderRegister, handleSignIn, handleRegister } from '../views/auth-view.js';
+import { renderSignIn, renderRegister } from '../views/auth-view.js';
 
 export function init() {
     const path = window.location.pathname;
@@ -9,21 +9,54 @@ export function init() {
     } else if (path === '/register') {
         renderRegister();
         setupRegisterListeners();
+    } else if (path === '/logout') {
+        handleLogout();
     }
 }
 
 function setupSignInListeners() {
     const signInBtn = document.querySelector('.signin-btn');
     if (signInBtn) {
-        signInBtn.addEventListener('click', handleSignIn);
+        signInBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Simulate successful login
+            window.authState.isAuthenticated = true;
+            window.authState.user = { 
+                name: 'User CodeForaLL',
+                email: document.getElementById('email').value
+            };
+            // Redirect to profile after login
+            window.history.pushState({}, '', '/profile');
+            window.dispatchEvent(new PopStateEvent('popstate'));
+        });
     }
 }
 
 function setupRegisterListeners() {
     const registerBtn = document.getElementById('register-btn');
     if (registerBtn) {
-        registerBtn.addEventListener('click', handleRegister);
+        registerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (validateRegistrationForm()) {
+                // Simulate successful registration
+                alert('Registration successful! Redirecting to sign in...');
+                window.history.pushState({}, '', '/signin');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+            }
+        });
     }
+    setupPasswordValidation();
+}
+
+function validateRegistrationForm() {
+    const password = document.getElementById('password')?.value;
+    const confirmPassword = document.getElementById('confirm-password')?.value;
+    
+    if (password && confirmPassword && password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return false;
+    }
+    return true;
 }
 
 function setupPasswordValidation() {
@@ -31,13 +64,22 @@ function setupPasswordValidation() {
     const confirmInput = document.getElementById('confirm-password');
     const matchIndicator = document.getElementById('password-match');
     
-    confirmInput?.addEventListener('input', () => {
-        if (passwordInput.value === confirmInput.value) {
-            matchIndicator.textContent = 'Passwords match!';
-            matchIndicator.style.color = 'green';
-        } else {
-            matchIndicator.textContent = 'Passwords do not match!';
-            matchIndicator.style.color = 'red';
-        }
-    });
+    if (confirmInput && matchIndicator) {
+        confirmInput.addEventListener('input', () => {
+            if (passwordInput.value === confirmInput.value) {
+                matchIndicator.textContent = 'Passwords match!';
+                matchIndicator.style.color = 'green';
+            } else {
+                matchIndicator.textContent = 'Passwords do not match!';
+                matchIndicator.style.color = 'red';
+            }
+        });
+    }
+}
+
+function handleLogout() {
+    window.authState.isAuthenticated = false;
+    window.authState.user = null;
+    window.history.pushState({}, '', '/');
+    window.dispatchEvent(new PopStateEvent('popstate'));
 }
