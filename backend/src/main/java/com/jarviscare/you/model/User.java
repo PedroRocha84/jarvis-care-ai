@@ -24,50 +24,40 @@ public class User {
     /**
      * Initializes a new {@code User} instance
      */
-    public User(){ medicines = new ArrayList<>();}
-
-    public void addMedicine(Medicine medicine){
-        medicines.add(medicine);
+    public User(){
+        medicines = new ArrayList<>();
     }
+
+    public void addMedicine(Medicine medicine){medicines.add(medicine); }
 
     /**
      * Get the user id
      * @return the user id
      */
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() { return id; }
 
     /**
      * Set the user id
      * @param id the user id
      */
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) {this.id = id;}
 
     /**
      * Get the user first name
      * @return the user first name
      */
-    public String getFirstname() {
-        return firstname;
-    }
+    public String getFirstname() {return firstname;}
 
     /**
      * Set the user first name
      * @param firstname
      */
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
+    public void setFirstname(String firstname) {this.firstname = firstname;}
     /**
      * Get the user last name
      * @return the user last name
      */
-    public String getLastname() {
-        return lastname;
-    }
+    public String getLastname() {return lastname;}
 
     /***
      * Set the user last name
