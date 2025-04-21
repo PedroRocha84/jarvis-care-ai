@@ -21,13 +21,9 @@ public class MedicineController {
 
   private UserService userService;
 
-  @Autowired
-  public MedicineController(MedicineService medicineService) {
-      this.medicineService = medicineService;
-  }
 
 
-  @RequestMapping(method = RequestMethod.GET, path = "/{id}/medicines")
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}/medicines")
   public ResponseEntity<List<Medicine>> listMedicines(@PathVariable Integer id) {
     try {
       User user = userService.get(id);
@@ -53,7 +49,6 @@ public class MedicineController {
 
   }
 
-
   @RequestMapping(method = RequestMethod.DELETE, path = "/{uid}/medicines/{mid}/delete")
   public ResponseEntity<String> deleteMedicine(@PathVariable Integer uid, @PathVariable Integer mid) {
       Medicine medicine = medicineService.get(mid);
@@ -67,4 +62,9 @@ public class MedicineController {
 
     @Autowired
     public void setUserService(UserService userService) {this.userService = userService;}
+
+    @Autowired
+    public void setMedicineService(MedicineService medicineService) {
+        this.medicineService = medicineService;
+    }
 }

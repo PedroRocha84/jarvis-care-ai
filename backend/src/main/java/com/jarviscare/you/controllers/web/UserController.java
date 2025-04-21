@@ -43,4 +43,7 @@ public class UserController {
         userService.update(user);
         return ResponseEntity.ok("User updated successfully");
     }
+
+    @Autowired
+    public void setUserService(UserServiceImpl userService) {this.userService = userService;}
 }
