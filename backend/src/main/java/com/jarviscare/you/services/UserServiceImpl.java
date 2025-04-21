@@ -104,5 +104,8 @@ public class UserServiceImpl implements UserService {
 
     public void setUsers(Map<Integer, User> users) { this.users = users;}
 
+    public void setUsersTest(){
+
+    }
 
 }
