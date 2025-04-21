@@ -12,7 +12,7 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     private Map<Integer, User> users;
     private MedicineServiceImpl medicineService;
-    private Map<Integer, Medicine> medicineMap;
+    private Map<Integer, Medicine> medicineMap = new HashMap<>();
     public UserServiceImpl() { users = new HashMap<>(); }
 
     /***
@@ -36,7 +36,8 @@ public class UserServiceImpl implements UserService {
      */
     public boolean userExists(Integer id) { return users.containsKey(id); }
 
-    private int getNextId() {
+    @Override
+    public Integer getUserNextId() {
         return users.isEmpty() ? 1: Collections.max(users.keySet()) + 1;
     }
 
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService {
     public void add(User user) {
 
         if(!userExists(user.getId())){
-            user.setId(getNextId());
+            user.setId(getUserNextId());
         }
 
         String passHashed = PasswordManager.hashPassword(user.getPassword());
@@ -83,39 +84,46 @@ public class UserServiceImpl implements UserService {
         users.put(user.getId(), user);
     }
 
+    @Override
+    public void deleteMedicine(Integer medicineId) {
+        try{
+            Medicine medicine = medicineMap.get(medicineId);
+            if (medicine != null) {
+                medicineMap.remove(medicineId);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /***
      * Add new medicine
      * @param medicine the medicine
      */
     @Override
-    public Medicine addMedicine(Integer userId, Medicine medicine) {
+    public void addMedicine(Medicine medicine) {
 
-        if(medicine.getMedicineId() == null){
-            medicine.setMedicineId(getNextId());
+        if (medicine.getMedicineId() == 0) {
+            Integer nextId = getMedicineNextId();
+            medicine.setMedicineId(nextId);
+            medicineMap.put(nextId, medicine);
+        } else {
+            medicineMap.put(medicine.getMedicineId(), medicine);
         }
-
-        medicineMap.put(medicine.getMedicineId(), medicine);
-        return medicine;
     }
 
-//    public void addMedicine(Integer id, Medicine medicine){
-//        User user = null;
-//
-//      try {
-//          user = get(id);
-//      } catch (UserNotFoundException e) {
-//          System.out.println("ALERT: Medicine already exists, please choose another medicine");
-//          System.out.println(e.getMessage());
-//      }
-//
-//      medicineService.addMedicine(medicine);
-//      user.addMedicine(medicine);
-//  }
+    @Override
+    public Integer getMedicineNextId() {
+        return medicineMap.isEmpty() ? 1: Collections.max(medicineMap.keySet()) + 1;
+    }
+
 
     @Autowired
     public void setMedicineService(MedicineServiceImpl medicineService) {
         this.medicineService = medicineService;
     }
+
 
     public void setUsers(Map<Integer, User> users) { this.users = users;}
 

@@ -18,11 +18,9 @@ public class MedicineServiceImpl implements MedicineService {
 
 
 
-    private Integer getNextId() { return medicineMap.isEmpty() ? 1 : Collections.max(medicineMap.keySet()) + 1;}
-
     @Override
-    public Medicine get(int medicineId) {
-        return medicineMap.get(medicineId);
+    public Integer get(int medicineId) {
+        return medicineMap.get(medicineId).getMedicineId();
     }
 
 }

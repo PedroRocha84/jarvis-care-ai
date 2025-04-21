@@ -42,18 +42,6 @@ public class MedicineController {
     }
   }
 
-  @RequestMapping(method = RequestMethod.POST, path = "/{id}/medicines/add")
-  public ResponseEntity<String> addMedicine(@PathVariable Integer id, @RequestBody Medicine medicine) {
-      try {
-          User user = userService.get(id);
-          user.addMedicine(medicine);
-          return ResponseEntity.status(HttpStatus.CREATED).body("medicine added successfully");
-      } catch (Exception e) {
-          throw new RuntimeException(e);
-      }
-
-  }
-
     @Autowired
     public void setUserService(UserService userService) {this.userService = userService;}
 }

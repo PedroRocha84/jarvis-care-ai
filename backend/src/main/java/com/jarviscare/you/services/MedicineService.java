@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MedicineService {
 
-    Medicine get(int id);
+    Integer get(int id);
 
 
 }

@@ -20,7 +20,7 @@ public class Medicine {
 
     private LocalDate lastDayOfMedicine;
 
-    public Integer getMedicineId() {
+    public int getMedicineId() {
         return medicineId;
     }
 

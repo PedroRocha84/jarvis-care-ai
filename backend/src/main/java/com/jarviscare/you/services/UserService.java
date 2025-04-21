@@ -16,6 +16,13 @@ public interface UserService {
      */
     void add(User user);
 
+
+    /**
+     * Delete a medicine
+     * @param medicineId of the medicine to delete
+     */
+    void deleteMedicine(Integer medicineId);
+
     /***
      * Update a given user
      * @param user the user that will be changed
@@ -29,6 +36,10 @@ public interface UserService {
 
     List<User> list();
 
-    Medicine addMedicine(Integer userId, Medicine medicine);
+    Integer getUserNextId();
+
+    Integer getMedicineNextId();
+
+    void addMedicine(Medicine medicine);
 
 }
