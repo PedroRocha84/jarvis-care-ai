@@ -12,7 +12,7 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     private Map<Integer, User> users;
     private MedicineServiceImpl medicineService;
-
+    private Map<Integer, Medicine> medicineMap;
     public UserServiceImpl() { users = new HashMap<>(); }
 
     /***
@@ -83,19 +83,34 @@ public class UserServiceImpl implements UserService {
         users.put(user.getId(), user);
     }
 
-    public void addMedicine(Integer id, Medicine medicine){
-        User user = null;
+    /***
+     * Add new medicine
+     * @param medicine the medicine
+     */
+    @Override
+    public Medicine addMedicine(Integer userId, Medicine medicine) {
 
-      try {
-          user = get(id);
-      } catch (UserNotFoundException e) {
-          System.out.println("ALERT: Medicine already exists, please choose another medicine");
-          System.out.println(e.getMessage());
-      }
+        if(medicine.getMedicineId() == null){
+            medicine.setMedicineId(getNextId());
+        }
 
-      medicineService.addMedicine(medicine);
-      user.addMedicine(medicine);
-  }
+        medicineMap.put(medicine.getMedicineId(), medicine);
+        return medicine;
+    }
+
+//    public void addMedicine(Integer id, Medicine medicine){
+//        User user = null;
+//
+//      try {
+//          user = get(id);
+//      } catch (UserNotFoundException e) {
+//          System.out.println("ALERT: Medicine already exists, please choose another medicine");
+//          System.out.println(e.getMessage());
+//      }
+//
+//      medicineService.addMedicine(medicine);
+//      user.addMedicine(medicine);
+//  }
 
     @Autowired
     public void setMedicineService(MedicineServiceImpl medicineService) {
@@ -104,8 +119,5 @@ public class UserServiceImpl implements UserService {
 
     public void setUsers(Map<Integer, User> users) { this.users = users;}
 
-    public void setUsersTest(){
-
-    }
 
 }

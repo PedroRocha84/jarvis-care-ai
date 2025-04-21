@@ -29,5 +29,6 @@ public interface UserService {
 
     List<User> list();
 
+    Medicine addMedicine(Integer userId, Medicine medicine);
 
 }
