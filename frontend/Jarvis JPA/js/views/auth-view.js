@@ -124,6 +124,29 @@ export function handleSignIn(e) {
 
 export function handleRegister(e) {
     e.preventDefault();
-    const formValid = validateRegistrationForm();
+    if (!validateRegistrationForm()) return;
+    
+    const formData = {
+        firstName: document.getElementById('firstname').value,
+        lastName: document.getElementById('lastname').value,
+        // ... other fields
+    };
+    
+    console.log('Registering with:', formData);
+    alert('Registration successful! Redirecting...');
+    
+    window.history.pushState({}, '', '/signin');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+}
 
+function validateRegistrationForm() {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    
+    if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return false;
+    }
+    
+    return true;
 }

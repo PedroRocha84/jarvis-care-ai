@@ -19,4 +19,6 @@ public interface AiService {
      */
     public Generation info(String question);
 
+    public String motivationalQuote();
+
 }

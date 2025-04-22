@@ -10,66 +10,49 @@ import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private Map<Integer, User> users;
-    private MedicineServiceImpl medicineService;
-    private Map<Integer, Medicine> medicineMap;
-    public UserServiceImpl() { users = new HashMap<>(); }
 
-    /***
-     * Get the user with the id
-     * @param id the users' id
-     * @return user
-     * @throws UserNotFoundException
-     */
+    private Map<Integer, User> usersMap;
+    private MedicineServiceImpl medicineService;
+
+    public UserServiceImpl() {
+        usersMap = new HashMap<>();
+    }
+
     @Override
     public User get(int id) throws UserNotFoundException {
-        if(!users.containsKey(id)){
+        if (!usersMap.containsKey(id)) {
             throw new UserNotFoundException();
         }
-        return users.get(id);
+        return usersMap.get(id);
     }
 
-    /**
-     * Check if the user exists
-     * @param id the users' id
-     * @return true if the user exists
-     */
-    public boolean userExists(Integer id) { return users.containsKey(id); }
+    public boolean userExists(Integer id) {
+        return usersMap.containsKey(id);
+    }
 
     private int getNextId() {
-        return users.isEmpty() ? 1: Collections.max(users.keySet()) + 1;
+        return usersMap.isEmpty() ? 1 : Collections.max(usersMap.keySet()) + 1;
     }
 
-    /***
-     * @see UserService#list
-     * @return a list of users
-     */
     @Override
     public List<User> list() {
-        return new ArrayList<>(users.values());
+        return new ArrayList<>(usersMap.values());
     }
 
-    /***
-     * @see UserService#list()
-     * @param user the user to add
-     */
     @Override
     public void add(User user) {
-
-        if(!userExists(user.getId())){
+        if (!userExists(user.getId())) {
             user.setId(getNextId());
         }
 
         String passHashed = PasswordManager.hashPassword(user.getPassword());
         user.setPassword(passHashed);
 
-        users.put(user.getId(), user);
-
+        usersMap.put(user.getId(), user);
     }
 
     @Override
     public void update(User user) {
-
         user.setId(user.getId());
         user.setFirstname(user.getFirstname());
         user.setLastname(user.getLastname());
@@ -80,44 +63,42 @@ public class UserServiceImpl implements UserService {
         user.setCity(user.getCity());
         user.setZipCode(user.getZipCode());
         user.setCountry(user.getCountry());
-        users.put(user.getId(), user);
+        usersMap.put(user.getId(), user);
     }
 
-    /***
-     * Add new medicine
-     * @param medicine the medicine
-     */
     @Override
-    public Medicine addMedicine(Integer userId, Medicine medicine) {
+    public void addMedicine(Integer userId, Medicine medicine) {
+        int nextId = medicineService.getNextId(); // Delegated
+        medicine.setMedicineId(nextId);
 
-        if(medicine.getMedicineId() == null){
-            medicine.setMedicineId(getNextId());
+        User user = usersMap.get(userId);
+        if (user != null) {
+            user.addMedicine(medicine);
         }
 
-        medicineMap.put(medicine.getMedicineId(), medicine);
-        return medicine;
+        medicineService.add(medicine); // Store in global map
     }
 
-//    public void addMedicine(Integer id, Medicine medicine){
-//        User user = null;
-//
-//      try {
-//          user = get(id);
-//      } catch (UserNotFoundException e) {
-//          System.out.println("ALERT: Medicine already exists, please choose another medicine");
-//          System.out.println(e.getMessage());
-//      }
-//
-//      medicineService.addMedicine(medicine);
-//      user.addMedicine(medicine);
-//  }
+    @Override
+    public void deleteMedicine(Integer userId, Medicine medicine) {
+        if (medicine == null) return;
+
+        medicineService.delete(medicine.getMedicineId()); // Global delete
+
+        User user = usersMap.get(userId);
+        if (user != null) {
+            List<Medicine> medicines = user.getMedicines();
+            for (int i = 0; i < medicines.size(); i++) {
+                if (medicines.get(i).getMedicineId().equals(medicine.getMedicineId())) {
+                    medicines.remove(i);
+                    break;
+                }
+            }
+        }
+    }
 
     @Autowired
     public void setMedicineService(MedicineServiceImpl medicineService) {
         this.medicineService = medicineService;
     }
-
-    public void setUsers(Map<Integer, User> users) { this.users = users;}
-
-
 }

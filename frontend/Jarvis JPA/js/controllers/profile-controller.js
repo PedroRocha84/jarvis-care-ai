@@ -1,24 +1,31 @@
 import { renderProfile } from '../views/profile-view.js';
 
 export function init() {
+    // Check authentication
+    if (!window.authState.isAuthenticated) {
+        window.history.pushState({}, '', '/signin');
+        window.dispatchEvent(new PopStateEvent('popstate'));
+        return;
+    }
+    
     renderProfile();
     setupProfileListeners();
 }
 
 function setupProfileListeners() {
-    // Edit Information button
-    const editBtn = document.querySelector('.profile-main .btn-outline');
+    // Edit Profile button
+    const editBtn = document.querySelector('.btn-edit');
     if (editBtn) {
         editBtn.addEventListener('click', () => {
-            alert('Edit functionality would go here');
+            alert('Edit profile functionality would go here');
         });
     }
     
-    // Add Contact button
-    const addContactBtn = document.querySelector('.card:nth-child(2) .btn-outline');
-    if (addContactBtn) {
-        addContactBtn.addEventListener('click', () => {
-            alert('Add contact functionality would go here');
+    // Profile menu items
+    document.querySelectorAll('.profile-menu a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert(`Would navigate to ${e.target.getAttribute('href')}`);
         });
-    }
+    });
 }

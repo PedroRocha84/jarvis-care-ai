@@ -21,13 +21,9 @@ public class MedicineController {
 
   private UserService userService;
 
-  @Autowired
-  public MedicineController(MedicineService medicineService) {
-      this.medicineService = medicineService;
-  }
 
 
-  @RequestMapping(method = RequestMethod.GET, path = "/{id}/medicines")
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}/medicines")
   public ResponseEntity<List<Medicine>> listMedicines(@PathVariable Integer id) {
     try {
       User user = userService.get(id);
@@ -45,8 +41,7 @@ public class MedicineController {
   @RequestMapping(method = RequestMethod.POST, path = "/{id}/medicines/add")
   public ResponseEntity<String> addMedicine(@PathVariable Integer id, @RequestBody Medicine medicine) {
       try {
-          User user = userService.get(id);
-          user.addMedicine(medicine);
+          userService.addMedicine(id, medicine);
           return ResponseEntity.status(HttpStatus.CREATED).body("medicine added successfully");
       } catch (Exception e) {
           throw new RuntimeException(e);
@@ -54,6 +49,22 @@ public class MedicineController {
 
   }
 
+  @RequestMapping(method = RequestMethod.DELETE, path = "/{uid}/medicines/{mid}/delete")
+  public ResponseEntity<String> deleteMedicine(@PathVariable Integer uid, @PathVariable Integer mid) {
+      Medicine medicine = medicineService.get(mid);
+      if (medicine == null) {
+          return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Medicine not found");
+      }
+      userService.deleteMedicine(uid, medicine);
+
+      return ResponseEntity.status(HttpStatus.OK).body("medicine deleted successfully");
+  }
+
     @Autowired
     public void setUserService(UserService userService) {this.userService = userService;}
+
+    @Autowired
+    public void setMedicineService(MedicineService medicineService) {
+        this.medicineService = medicineService;
+    }
 }

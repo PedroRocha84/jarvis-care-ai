@@ -1,5 +1,12 @@
 import router from './router.js';
 
+const authState = {
+    isAuthenticated: false,
+    user: null
+};
+
+window.authState = authState;
+
 addEventListener('DOMContentLoaded', () => {
     init();
     router.start();
@@ -24,15 +31,25 @@ function createHeader() {
 
     const nav = document.createElement('nav');
     nav.classList.add('navbar');
-    nav.innerHTML = `
+    
+    nav.innerHTML = authState.isAuthenticated ? `
+        <a href="/profile">My Profile</a>
+        <a href="/dashboard">My Schedule</a>
+        <a href="/logout">Logout</a>
+    ` : `
         <a href="/">Home</a>
         <a href="/signin">Sign In</a>
         <a href="/register">Register</a>
-        <a href="/profile">Profile</a>
     `;
 
     header.appendChild(pageTitle);
     header.appendChild(nav);
+    
+    nav.querySelectorAll('a').forEach(link => {
+        if (link.pathname === window.location.pathname) {
+            link.classList.add('active');
+        }
+    });
 
     return header;
 }

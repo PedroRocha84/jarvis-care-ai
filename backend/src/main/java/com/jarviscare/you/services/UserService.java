@@ -1,5 +1,6 @@
 package com.jarviscare.you.services;
 
+import com.jarviscare.you.exceptions.UserNotFoundException;
 import com.jarviscare.you.model.Medicine;
 import com.jarviscare.you.model.User;
 
@@ -7,14 +8,20 @@ import java.util.List;
 
 public interface UserService {
 
-    User get(int userId) throws Exception;
-
     /**
      * Add a given user to user list
      * @param user the user to add
      * @return the user
      */
     void add(User user);
+
+    /**
+     * Get the user from its userId
+     * @param userId the user identification number
+     * @return the user
+     * @throws UserNotFoundException user not found exception
+     */
+    User get(int userId) throws UserNotFoundException;
 
     /***
      * Update a given user
@@ -29,6 +36,8 @@ public interface UserService {
 
     List<User> list();
 
-    Medicine addMedicine(Integer userId, Medicine medicine);
+    void addMedicine(Integer userId, Medicine medicine);
+
+    void deleteMedicine(Integer userId, Medicine medicine);
 
 }
