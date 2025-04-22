@@ -21,9 +21,7 @@ public class MedicineController {
 
   private UserService userService;
 
-
-
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}/medicines")
+  @RequestMapping(method = RequestMethod.GET, path = "/{id}/medicines")
   public ResponseEntity<List<Medicine>> listMedicines(@PathVariable Integer id) {
     try {
       User user = userService.get(id);

@@ -33,6 +33,7 @@ public class AiServiceImpl implements AiService {
 
     @Value("${ai.rag_number_results}")
     private int numberResults;
+
     @Override
     public String motivationalQuote() {
         OpenAiApi openaiApi = new OpenAiApi(apiKey);
