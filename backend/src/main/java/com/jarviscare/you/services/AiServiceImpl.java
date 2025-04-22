@@ -4,11 +4,9 @@ import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.Generation;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.ai.document.Document;
 import org.springframework.ai.openai.OpenAiChatClient;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.ai.openai.api.OpenAiApi;
-import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -18,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class AiServiceImp implements AiService {
+public class AiServiceImpl implements AiService {
 
     @Value("${ai.api_key}")
     private String apiKey;
