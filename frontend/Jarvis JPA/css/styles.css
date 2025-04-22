@@ -217,6 +217,18 @@ header {
     margin-bottom: 0;
 }
 
+.aiquote{
+    margin: auto;
+    width: 80%;
+    height: 70px;
+    padding-bottom: 3.5rem;
+    padding-top: 3rem;
+}
+
+.aiquote h2{
+    color: #555;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
     .auth-container {
@@ -251,9 +263,7 @@ header {
 
 /* Profile Page Styles */
 .profile-container {
-    display: flex;
-    gap: 2rem;
-    padding: 2rem;
+    max-width: 1200px;
 }
 
 .profile-sidebar {
@@ -637,7 +647,7 @@ header {
 .profile-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  
 }
 
 .profile-header {
@@ -648,7 +658,8 @@ header {
 }
 
 .profile-content {
-  display: flex;
+  /* display: flex;  */
+
   gap: 2rem;
 }
 

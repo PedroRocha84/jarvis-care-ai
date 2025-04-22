@@ -3,15 +3,19 @@ export function renderProfile() {
     const user = window.authState.user || {};
     
     main.innerHTML = `
-        <div class="profile-container">
-            <div class="profile-header">
-                <h1>My Profile</h1>
+     <div class="profile-header">
+                <h1>Olá Raquel, </h1>
                 <a href="/dashboard" class="btn btn-primary">
                     <i class="fas fa-calendar-alt"></i> View My Schedule
                 </a>
             </div>
+        <div class="profile-container">
+           
 
             <div class="profile-content">
+            <div class = "aiquote">
+                <h2>"Embrace each day with courage; your strength is the light guiding you to healing."</h2>
+            </div>
                 <div class="profile-sidebar">
                     <div class="profile-summary">
                         <div class="avatar">
