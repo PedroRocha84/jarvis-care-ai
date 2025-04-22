@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestAiController {
 
     private AiService aiService;
-    //http://localhost:8080/jarvis/api/ai
-    @RequestMapping(method = RequestMethod.POST, path = {"", "/"})
+    //http://localhost:8080/jarvis/api/ai/quote
+    @RequestMapping(method = RequestMethod.POST, path = {"/quote", "/quote/"})
     public ResponseEntity<String> quote() {
         try {
             return new ResponseEntity<>(aiService.motivationalQuote(), HttpStatus.OK);
