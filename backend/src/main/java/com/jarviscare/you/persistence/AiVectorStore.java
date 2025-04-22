@@ -22,7 +22,7 @@ import java.util.List;
  * into smaller parts for efficient search and retrieval.
  */
 @Component
-public class VectorStore {
+public class AiVectorStore {
     @Value("${ai.vector_store_file}")
     private String storeFilePath;
 
@@ -73,7 +73,14 @@ public class VectorStore {
     public List<String> search(String searchParam) {
         List<Document> documents = vectorStore.similaritySearch(SearchRequest.query(searchParam).withTopK(numberResults));
 
-        return documents.stream().map(Document::getContent).toList();
+        double threshold = 0.80;
+
+        return documents.stream()
+                .filter(doc -> {
+                    Object scoreObj = doc.getMetadata().get("score");
+                    return scoreObj instanceof Number && ((Number) scoreObj).doubleValue() >= threshold;
+                })
+                .map(Document::getContent).toList();
     }
 
     /**

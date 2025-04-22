@@ -36,7 +36,7 @@
         <constructor-arg ref="embeddingClient" />
     </bean>
 
-    <bean id="vectorStore" class="com.jarviscare.you.persistence.VectorStore" init-method="init">
+    <bean id="vectorStore" class="com.jarviscare.you.persistence.AiVectorStore" init-method="init">
         <property name="simpleVectorStore" ref="simpleVectorStore"/>
     </bean>
 </beans>
