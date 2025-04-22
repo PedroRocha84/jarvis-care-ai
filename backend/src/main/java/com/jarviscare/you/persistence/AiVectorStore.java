@@ -73,13 +73,13 @@ public class AiVectorStore {
     public List<String> search(String searchParam) {
         List<Document> documents = vectorStore.similaritySearch(SearchRequest.query(searchParam).withTopK(numberResults));
 
-        double threshold = 0.80;
+//        double threshold = 0.70;
 
         return documents.stream()
-                .filter(doc -> {
-                    Object scoreObj = doc.getMetadata().get("score");
-                    return scoreObj instanceof Number && ((Number) scoreObj).doubleValue() >= threshold;
-                })
+//                .filter(doc -> {
+//                    Object scoreObj = doc.getMetadata().get("score");
+//                    return scoreObj instanceof Number && ((Number) scoreObj).doubleValue() >= threshold;
+//                })
                 .map(Document::getContent).toList();
     }
 

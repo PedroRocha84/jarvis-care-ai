@@ -32,9 +32,6 @@ public class AiServiceImpl implements AiService {
     public Generation info(String question) {
         List<String> contentList = vectorStore.search(question);
 
-//        List<Document> documents = vectorStore.similaritySearch(SearchRequest.query(question).withTopK(numberResults));
-//        List<String> contentList = documents.stream().map(Document::getContent).toList();
-
         PromptTemplate promptTemplate = new PromptTemplate(ragPromptTemplate);
         Prompt prompt = promptTemplate.create(Map.of(
                 "input", question,
