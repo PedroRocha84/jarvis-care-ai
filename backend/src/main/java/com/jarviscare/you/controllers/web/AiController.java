@@ -19,7 +19,7 @@ public class AiController {
     private AiService aiService;
     private AiGenerationAnswerDto generationAnswerDto;
 
-//@RequestBody AiQuestionDto questionDto --> recebe um JSON com os dados da pergunta no corpo da requisição e transforma num objeto Java (questionDto).
+    //@RequestBody AiQuestionDto questionDto --> recebe um JSON com os dados da pergunta no corpo da requisição e transforma num objeto Java (questionDto).
     //@Valid >> ativa validação automatica dos @NotNull
     //BindingResult bindingResult >> guarda os erros de validação se existirem
     @RequestMapping(method = RequestMethod.POST, path = {"/careassistant", "/careassistant/"})
@@ -30,9 +30,9 @@ public class AiController {
         }
 
         return new ResponseEntity<>(generationAnswerDto.convert(aiService.info(questionDto.getQuestion())), HttpStatus.OK);
-    //questionDto.getQuestion() >> pega na pergunta feita pelo paciente
+        //questionDto.getQuestion() >> pega na pergunta feita pelo paciente
         //aiService.info chama o serviço de AI e passa a questão ao LLM que vai gerar a resposta
-    //generationAnswerDto.convert >> transforma o resultado (Generation) em DTO (AiAnswerDto) para devolver ao cliente
+        //generationAnswerDto.convert >> transforma o resultado (Generation) em DTO (AiAnswerDto) para devolver ao cliente
     }
 
     /**
