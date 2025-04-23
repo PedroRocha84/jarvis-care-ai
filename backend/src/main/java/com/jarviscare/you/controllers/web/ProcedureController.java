@@ -55,6 +55,13 @@ public class ProcedureController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    /* exemplo de JSON para criar exame
+    {
+        "dateTime": "2025-04-25T10:30:00",
+        "examType": "Raio-X",
+        "examLocation": "Hospital Central"
+    }
+    */
 
     @RequestMapping(method = RequestMethod.POST, path = "/{id}/procedures/treatment")
     public ResponseEntity<ProcedureResponseDto> createTreatment(@RequestBody TreatmentRequestDto treatmentRequest, @PathVariable Integer id) {
@@ -70,6 +77,13 @@ public class ProcedureController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+       /* exemplo de JSON para criar tratamento
+    {
+        "dateTime": "2025-04-25T10:30:00",
+        "treatmentName": "Some",
+        "sessionsNumber": "1"
+    }
+    */
 
     @RequestMapping(method = RequestMethod.POST, path = "/{id}/procedures/appointment")
     public ResponseEntity<ProcedureResponseDto> createAppointment(@RequestBody AppointmentRequestDto appointmentRequest, @PathVariable Integer id) {
@@ -85,6 +99,13 @@ public class ProcedureController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+     /* exemplo de JSON para criar appointment
+    {
+        "dateTime": "2025-04-25T10:30:00",
+        "speciality": "Some",
+        "doctorName": "Alvaro Silva"
+    }
+    */
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}/procedures/{pid}")
     public ResponseEntity<ProcedureResponseDto> deleteProcedure(@PathVariable Integer id, @PathVariable Integer pid) {
@@ -94,7 +115,7 @@ public class ProcedureController {
 
         userService.deleteMedicalProcedure(user.getId(), pid);
 
-        return new ResponseEntity<>(new ProcedureResponseDto(procedure.getId(), "Procedure: "+ procedure.getType()+ "successfully deleted."), HttpStatus.OK);
+        return new ResponseEntity<>(new ProcedureResponseDto(procedure.getId(), "Procedure: "+ procedure.getType()+ " successfully deleted."), HttpStatus.OK);
         } catch (UserNotFoundException | ProcedureNotFundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
