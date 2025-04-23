@@ -7,13 +7,9 @@ function start() {
     addEventListener('popstate', handlePopState);
 }
 
-function navigate(path, firstLoad) {
-    if (path === routes.currentPath.path) {
-        return;
-    }
-
+function navigate(path, firstLoad = false) {
     const routeKey = Object.keys(routes).find(key => routes[key].path === path);
-    const route = routes[routeKey] || routes.home;
+    const route = routeKey ? routes[routeKey] : routes.home;
 
     setCurrentRoute(route);
 
@@ -29,30 +25,33 @@ function setCurrentRoute(route) {
     routes.currentPath.controller = route.controller;
 }
 
-async function initializeController(controller) {
+async function initializeController(controllerName) {
     try {
-        const controllerModule = await import(`./controllers/${controller}.js`);
-        controllerModule.init();
+        const controllerModule = await import(`./controllers/${controllerName}.js`);
+        if (typeof controllerModule.init === 'function') {
+            controllerModule.init();
+        } else {
+            throw new Error(`Controller ${controllerName} missing init function`);
+        }
     } catch (error) {
-        console.log(error);
+        console.error('Controller initialization failed:', error);
+        // Fallback to home
+        import('./controllers/home-controller.js').then(m => m.init());
     }
 }
 
 function setAnchorEventListener() {
-    const anchors = document.querySelectorAll('nav a');
-    anchors.forEach(anchor => {
-        anchor.addEventListener('click', event => {
+    document.addEventListener('click', (event) => {
+        if (event.target.tagName === 'A' && event.target.getAttribute('href').startsWith('/')) {
             event.preventDefault();
-            navigate(anchor.pathname);
-        });
+            navigate(event.target.getAttribute('href'));
+        }
     });
 }
 
-function handlePopState(data) {
-    const { state } = data;
-    const route = state || routes.home;
-    setCurrentRoute(route);
-    initializeController(route.controller);
+function handlePopState(event) {
+    const path = event.state?.path || window.location.pathname;
+    navigate(path);
 }
 
 export default { start };

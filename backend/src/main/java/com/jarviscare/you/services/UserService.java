@@ -52,4 +52,6 @@ public interface UserService {
 
     void deleteMedicalProcedure(Integer userId, Integer MedicalProcedureId);
 
+    User getUserByEmail(String email);
+
 }
