@@ -5,6 +5,9 @@ export function renderProfile() {
     main.innerHTML = `
      <div class="profile-header">
                 <h1>Olá Raquel, </h1>
+                <a href="/medicines" class="btn btn-primary">
+                    <i class="fas fa-medicine-alt"></i> View My Medicine
+                </a>
                 <a href="/dashboard" class="btn btn-primary">
                     <i class="fas fa-calendar-alt"></i> View My Schedule
                 </a>
