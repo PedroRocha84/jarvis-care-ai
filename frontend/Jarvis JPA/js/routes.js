@@ -26,5 +26,9 @@ export default {
     currentPath: {
         path: '',
         controller: ''
+    },
+    medicineinfo: {
+        path: '/medicines',
+        controller: 'medicineinfo-controller'
     }
 };
