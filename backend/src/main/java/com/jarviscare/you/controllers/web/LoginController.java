@@ -26,7 +26,6 @@ public class LoginController {
         String email = user.getEmail();
         String password = user.getPassword();
 
-
         if (email == null || password == null ) {
             return new ResponseEntity<>("Missing fields", HttpStatus.BAD_REQUEST);
         }
