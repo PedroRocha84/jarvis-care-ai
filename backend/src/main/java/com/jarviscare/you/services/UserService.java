@@ -40,4 +40,6 @@ public interface UserService {
 
     void deleteMedicine(Integer userId, Medicine medicine);
 
+    User getUserByEmail(String email);
+
 }
