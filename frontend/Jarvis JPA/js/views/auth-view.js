@@ -110,16 +110,42 @@ export function renderRegister() {
 }
 
 export function handleSignIn(e) {
-    e.preventDefault();
+    
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const remember = document.getElementById('remember').checked;
+
+    console.log(email);
+    console.log(password);
     
-    console.log('Signing in with:', { email, password, remember });
-    alert('Isto vai para onde????');
-    // Redirect to home after successful login
-    window.history.pushState({}, '', '/');
-    window.dispatchEvent(new PopStateEvent('popstate'));
+    fetch("http://localhost:8080/jarvis/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password }),
+        mode: 'cors' // Required for cross-origin requests
+    })
+    .then(response => {
+        if (!response.ok) {
+            // Optional: handle errors visually
+            alert("Login failed: " + response.statusText);
+            return;
+        }
+        alert("Login success: " + response.statusText);
+        return response.text(); // Assuming the server returns plain text like "Login successful"
+    })
+    .then(data => {
+        console.log(data); // Optional: log server message
+
+        // Redirect only on success
+        window.history.pushState({}, '', '/');
+        window.dispatchEvent(new PopStateEvent('popstate'));
+    })
+    .catch(error => {
+        console.error("Error during login:", error);
+        alert("An error occurred during login.");
+    });
 }
 
 export function handleRegister(e) {

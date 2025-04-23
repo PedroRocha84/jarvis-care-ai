@@ -1,4 +1,4 @@
-import { renderSignIn, renderRegister } from '../views/auth-view.js';
+import { renderSignIn, renderRegister, handleSignIn } from '../views/auth-view.js';
 
 export function init() {
     const path = window.location.pathname;
@@ -18,16 +18,7 @@ function setupSignInListeners() {
     const signInBtn = document.querySelector('.signin-btn');
     if (signInBtn) {
         signInBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Simulate successful login
-            window.authState.isAuthenticated = true;
-            window.authState.user = { 
-                name: 'User CodeForaLL',
-                email: document.getElementById('email').value
-            };
-            // Redirect to profile after login
-            window.history.pushState({}, '', '/profile');
-            window.dispatchEvent(new PopStateEvent('popstate'));
+            handleSignIn();
         });
     }
 }

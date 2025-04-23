@@ -3,7 +3,7 @@ export function renderProfile() {
     const user = window.authState.user || {};
     
     main.innerHTML = `
-     <div class="profile-header">
+        <div class="profile-header">
                 <h1>Olá Raquel, </h1>
                 <a href="/dashboard" class="btn btn-primary">
                     <i class="fas fa-calendar-alt"></i> View My Schedule
