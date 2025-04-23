@@ -136,10 +136,18 @@ export function handleSignIn(e) {
         return response.text(); // Assuming the server returns plain text like "Login successful"
     })
     .then(data => {
-        console.log(data); // Optional: log server message
+        if (!data) return;
 
-        // Redirect only on success
-        window.history.pushState({}, '', '/');
+        // Store session
+        sessionStorage.setItem('user', JSON.stringify({ email: data.email }));
+
+        window.authState = {
+            isAuthenticated: true,
+            user: { email: data.email },
+        };
+
+            // Redirect
+        window.history.pushState({ email }, '', '/profile');
         window.dispatchEvent(new PopStateEvent('popstate'));
     })
     .catch(error => {
