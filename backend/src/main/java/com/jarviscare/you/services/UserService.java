@@ -3,7 +3,11 @@ package com.jarviscare.you.services;
 import com.jarviscare.you.exceptions.UserNotFoundException;
 import com.jarviscare.you.model.Medicine;
 import com.jarviscare.you.model.User;
+import com.jarviscare.you.model.procedure.Exam;
+import com.jarviscare.you.model.procedure.MedicalAppointment;
+import com.jarviscare.you.model.procedure.Treatment;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UserService {
@@ -39,6 +43,14 @@ public interface UserService {
     void addMedicine(Integer userId, Medicine medicine);
 
     void deleteMedicine(Integer userId, Medicine medicine);
+
+    Treatment createTreatment(Integer userId, LocalDateTime dateTime , String treatmentName, int sessionNumber);
+
+    Exam createExam(Integer userId, LocalDateTime dateTime, String examType, String examLocation);
+
+    MedicalAppointment createMedicalAppointment(Integer userId, LocalDateTime dateTime, String speciality, String doctorName);
+
+    void deleteMedicalProcedure(Integer userId, Integer MedicalProcedureId);
 
     User getUserByEmail(String email);
 
