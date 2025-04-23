@@ -13,28 +13,24 @@ import java.util.Map;
 public class LoginController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        // Hardcoded user
+    public ResponseEntity<?> login(@RequestBody User user) {
         String hardcodedEmail = "queijo22@gmail.com";
         String hardcodedPassword = "sadfghjFon$92";
 
-        // Compare with incoming data
         if (hardcodedEmail.equalsIgnoreCase(user.getEmail()) &&
                 hardcodedPassword.equals(user.getPassword())) {
 
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Login successful");
             response.put("user", hardcodedEmail);
-            response.put("token", "abc123-fake-token"); // Placeholder
+            response.put("token", "abc123-fake-token");
 
-            return ResponseEntity.ok(response.toString());
+            return ResponseEntity.ok(response);
         } else {
             Map<String, String> error = new HashMap<>();
             error.put("message", "Invalid email or password");
 
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error.toString());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
         }
     }
     }
-
-}
