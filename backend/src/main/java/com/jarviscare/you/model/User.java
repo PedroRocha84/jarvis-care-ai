@@ -26,6 +26,7 @@ public class User {
      */
     public User(){
         medicines = new ArrayList<>();
+        medicalProcedures = new ArrayList<>();
     }
 
     public void addMedicine(Medicine medicine){medicines.add(medicine); }

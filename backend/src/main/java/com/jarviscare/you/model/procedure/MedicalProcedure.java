@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public abstract class MedicalProcedure {
 
+
+    private Integer id;
     private LocalDateTime dateTime;
     private ProcedureType type;
 
@@ -29,4 +31,8 @@ public abstract class MedicalProcedure {
     public void setType(ProcedureType type) {
         this.type = type;
     }
+
+    public Integer getId(){return id;}
+
+    public void setId(int id) {this.id = id;}
 }

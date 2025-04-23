@@ -47,4 +47,6 @@ public interface UserService {
 
     void createMedicalAppointment(Integer userId, LocalDateTime dateTime, String speciality, String doctorName);
 
+    void removeMedicalProcedure(Integer userId, Integer MedicalProcedureId);
+
 }

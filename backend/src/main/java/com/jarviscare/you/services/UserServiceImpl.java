@@ -120,7 +120,14 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             user.addMedicalProcedure(medicalProcedureService.createMedicalAppointment(dateTime, speciality, doctorName));
         }
+    }
 
+    public void removeMedicalProcedure(Integer userId, Integer MedicalProcedureId) {
+
+        User user = usersMap.get(userId);
+        if (user != null) {
+            user.getMedicalProcedures().removeIf(mp -> Objects.equals(mp.getId(), MedicalProcedureId));
+        }
     }
 
     @Autowired
