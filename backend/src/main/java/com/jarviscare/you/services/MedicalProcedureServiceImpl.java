@@ -24,7 +24,6 @@ public class MedicalProcedureServiceImpl implements MedicalProcedureService {
         treatment.setTreatmentName(treatmentName);
         treatment.setSessionsNumber(sessionsNumber);
 
-        ultimoId++;
         return treatment;
     }
 
@@ -35,7 +34,6 @@ public class MedicalProcedureServiceImpl implements MedicalProcedureService {
         exam.setExamType(examType);
         exam.setExamLocation(examLocation);
 
-        ultimoId++;
         return exam;
     }
 
@@ -46,7 +44,6 @@ public class MedicalProcedureServiceImpl implements MedicalProcedureService {
         medicalAppointment.setSpeciality(speciality);
         medicalAppointment.setDoctorName(doctorName);
 
-        ultimoId++;
         return medicalAppointment;
     }
 

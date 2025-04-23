@@ -3,6 +3,8 @@ package com.jarviscare.you.services;
 import com.jarviscare.you.exceptions.UserNotFoundException;
 import com.jarviscare.you.model.Medicine;
 import com.jarviscare.you.model.User;
+import com.jarviscare.you.model.procedure.Exam;
+import com.jarviscare.you.model.procedure.MedicalAppointment;
 import com.jarviscare.you.model.procedure.Treatment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,29 +102,38 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public void createTreatment(Integer userId, LocalDateTime dateTime ,String treatmentName, int sessionNumber) {
+    public Treatment createTreatment(Integer userId, LocalDateTime dateTime ,String treatmentName, int sessionNumber) {
 
         User user = usersMap.get(userId);
+        Treatment treatment = null;
         if (user != null) {
-            user.addMedicalProcedure(medicalProcedureService.createTreatment(dateTime,treatmentName,sessionNumber));
+            treatment = medicalProcedureService.createTreatment(dateTime,treatmentName,sessionNumber);
+            user.addMedicalProcedure(treatment);
         }
+        return treatment;
     }
 
-    public void createExam(Integer userId, LocalDateTime dateTime, String examType, String examLocation) {
+    public Exam createExam(Integer userId, LocalDateTime dateTime, String examType, String examLocation) {
         User user = usersMap.get(userId);
+        Exam exam = null;
         if (user != null) {
-            user.addMedicalProcedure(medicalProcedureService.createExam(dateTime, examType, examLocation));
+            exam = medicalProcedureService.createExam(dateTime, examType, examLocation);
+            user.addMedicalProcedure(exam);
         }
+        return exam;
     }
 
-    public void createMedicalAppointment(Integer userId, LocalDateTime dateTime, String speciality, String doctorName) {
+    public MedicalAppointment createMedicalAppointment(Integer userId, LocalDateTime dateTime, String speciality, String doctorName) {
         User user = usersMap.get(userId);
+        MedicalAppointment appointment = null;
         if (user != null) {
-            user.addMedicalProcedure(medicalProcedureService.createMedicalAppointment(dateTime, speciality, doctorName));
+            appointment = medicalProcedureService.createMedicalAppointment(dateTime, speciality, doctorName);
+            user.addMedicalProcedure(appointment);
         }
+        return appointment;
     }
 
-    public void removeMedicalProcedure(Integer userId, Integer MedicalProcedureId) {
+    public void deleteMedicalProcedure(Integer userId, Integer MedicalProcedureId) {
 
         User user = usersMap.get(userId);
         if (user != null) {

@@ -14,7 +14,7 @@ public class MedicalAppointment extends MedicalProcedure {
     }
     @Override
     public String getDescription() {
-        return " Medical appointment with Dr.º " + doctorName + " From Speciality: "+speciality;
+        return " Medical appointment with Dr.º " + doctorName + " From Speciality: "+speciality +" on " + getDateTime().toString()+ " with the procedure id: "+getId();
     }
 
     public String getSpeciality() {
