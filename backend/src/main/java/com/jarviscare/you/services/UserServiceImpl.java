@@ -97,6 +97,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    public User getUserByEmail(String email){
+
+        return usersMap.values().stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst().orElse(null);
+    }
+
     @Autowired
     public void setMedicineService(MedicineServiceImpl medicineService) {
         this.medicineService = medicineService;
