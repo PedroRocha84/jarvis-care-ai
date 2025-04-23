@@ -8,12 +8,12 @@ export async function renderMedicineInfo(viewType = 'daily') {
         day: 'numeric' 
     });
 
+    const userId = window.authState?.user?.id;
     let medicines = [];
 
-    const userId = window.authState.user?.id;
-
     if (!userId) {
-        main.innerHTML = `<p class="error">User not logged in</p>`;
+        alert("You need login")
+        //main.innerHTML = `<p class="error">User not logged in</p>`;
         return;
     }
 
@@ -26,32 +26,6 @@ export async function renderMedicineInfo(viewType = 'daily') {
         main.innerHTML = `<p class="error">Error fetching medicine data. Try later.</p>`;
         return;
     }
-
-    /*
-    const sampleEvents = [
-        {
-            id: 1,
-            type: 'medicine',
-            title: 'Tamoxifeno',
-            time: '09:30 AM',
-            lastDay: "15-07-2025"
-        },
-        {
-            id: 2,
-            type: 'medicine',
-            title: 'Voltaren',
-            time: '12:00 AM',
-            lastDay: "15-07-2025"
-        },
-        {
-            id: 3,
-            type: 'medicine',
-            title: 'Benuron',
-            time: '06:00 PM',
-            lastDay: "15-07-2025"
-        }
-    ];
-    */
 
 
     main.innerHTML = `
