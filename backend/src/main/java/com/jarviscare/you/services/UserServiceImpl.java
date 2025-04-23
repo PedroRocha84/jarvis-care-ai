@@ -103,12 +103,12 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public Treatment createTreatment(Integer userId, LocalDateTime dateTime ,String treatmentName, int sessionNumber) {
+    public Treatment createTreatment(Integer userId, LocalDateTime dateTime, String treatmentName, int sessionNumber) {
 
         User user = usersMap.get(userId);
         Treatment treatment = null;
         if (user != null) {
-            treatment = medicalProcedureService.createTreatment(dateTime,treatmentName,sessionNumber);
+            treatment = medicalProcedureService.createTreatment(dateTime, treatmentName, sessionNumber);
             user.addMedicalProcedure(treatment);
         }
         return treatment;
@@ -141,9 +141,9 @@ public class UserServiceImpl implements UserService {
             user.getMedicalProcedures().removeIf(mp -> Objects.equals(mp.getId(), MedicalProcedureId));
         }
     }
-  
-  
-    public User getUserByEmail(String email){
+
+
+    public User getUserByEmail(String email) {
 
         return usersMap.values().stream()
                 .filter(user -> user.getEmail().equals(email))
@@ -154,6 +154,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public void setMedicalProcedureService(MedicalProcedureService medicalProcedureService) {
         this.medicalProcedureService = medicalProcedureService;
+    }
 
 
     @Autowired
