@@ -47,9 +47,9 @@ export async function renderMedicineInfo(viewType = 'daily') {
 
 
     main.innerHTML = `
-        <div class="medicineinfo-container">
-            <div class="medicineinfo-header">
-                <h1 class="medicineinfo-title">Today's Medicine - ${formattedDate}</h1>
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Today's Medicine - ${formattedDate}</h1>
                 <div class="view-switcher">
                     <button class="view-btn ${viewType === 'daily' ? 'active' : ''}" data-view="daily">Daily</button>
                     <button class="view-btn ${viewType === 'weekly' ? 'active' : ''}" data-view="weekly">Weekly</button>
