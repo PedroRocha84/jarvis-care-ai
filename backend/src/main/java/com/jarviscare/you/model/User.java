@@ -1,6 +1,6 @@
 package com.jarviscare.you.model;
 
-import org.springframework.stereotype.Component;
+import com.jarviscare.you.model.procedure.MedicalProcedure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ public class User {
     private String country;
 
     private List<Medicine> medicines;
+    private List<MedicalProcedure> medicalProcedures;
 
     /**
      * Initializes a new {@code User} instance
@@ -28,6 +29,10 @@ public class User {
     }
 
     public void addMedicine(Medicine medicine){medicines.add(medicine); }
+
+    public void addMedicalProcedure(MedicalProcedure medicalProcedure){
+        medicalProcedures.add(medicalProcedure);
+    }
 
     /**
      * Get the user id
@@ -130,5 +135,13 @@ public class User {
 
     public void setMedicines(List<Medicine> medicines) {
         this.medicines = medicines;
+    }
+
+    public List<MedicalProcedure> getMedicalProcedures() {
+        return medicalProcedures;
+    }
+
+    public void setMedicalProcedures(List<MedicalProcedure> medicalProcedures) {
+        this.medicalProcedures = medicalProcedures;
     }
 }

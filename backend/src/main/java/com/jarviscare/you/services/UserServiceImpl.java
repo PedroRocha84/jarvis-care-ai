@@ -3,9 +3,11 @@ package com.jarviscare.you.services;
 import com.jarviscare.you.exceptions.UserNotFoundException;
 import com.jarviscare.you.model.Medicine;
 import com.jarviscare.you.model.User;
+import com.jarviscare.you.model.procedure.Treatment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -13,6 +15,7 @@ public class UserServiceImpl implements UserService {
 
     private Map<Integer, User> usersMap;
     private MedicineServiceImpl medicineService;
+    private MedicalProcedureService medicalProcedureService;
 
     public UserServiceImpl() {
         usersMap = new HashMap<>();
@@ -95,6 +98,34 @@ public class UserServiceImpl implements UserService {
                 }
             }
         }
+    }
+
+    public void createTreatment(Integer userId, LocalDateTime dateTime ,String treatmentName, int sessionNumber) {
+
+        User user = usersMap.get(userId);
+        if (user != null) {
+            user.addMedicalProcedure(medicalProcedureService.createTreatment(dateTime,treatmentName,sessionNumber));
+        }
+    }
+
+    public void createExam(Integer userId, LocalDateTime dateTime, String examType, String examLocation) {
+        User user = usersMap.get(userId);
+        if (user != null) {
+            user.addMedicalProcedure(medicalProcedureService.createExam(dateTime, examType, examLocation));
+        }
+    }
+
+    public void createMedicalAppointment(Integer userId, LocalDateTime dateTime, String speciality, String doctorName) {
+        User user = usersMap.get(userId);
+        if (user != null) {
+            user.addMedicalProcedure(medicalProcedureService.createMedicalAppointment(dateTime, speciality, doctorName));
+        }
+
+    }
+
+    @Autowired
+    public void setMedicalProcedureService(MedicalProcedureService medicalProcedureService) {
+        this.medicalProcedureService = medicalProcedureService;
     }
 
     @Autowired

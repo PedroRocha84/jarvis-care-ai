@@ -4,6 +4,7 @@ import com.jarviscare.you.exceptions.UserNotFoundException;
 import com.jarviscare.you.model.Medicine;
 import com.jarviscare.you.model.User;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UserService {
@@ -39,5 +40,11 @@ public interface UserService {
     void addMedicine(Integer userId, Medicine medicine);
 
     void deleteMedicine(Integer userId, Medicine medicine);
+
+    void createTreatment(Integer userId, LocalDateTime dateTime , String treatmentName, int sessionNumber);
+
+    void createExam(Integer userId, LocalDateTime dateTime, String examType, String examLocation);
+
+    void createMedicalAppointment(Integer userId, LocalDateTime dateTime, String speciality, String doctorName);
 
 }
