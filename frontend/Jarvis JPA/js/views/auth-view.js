@@ -29,7 +29,7 @@ export function renderSignIn() {
                 
                 <button class="signin-btn">SIGN IN</button>
                 <div class="create-account">
-                    Don't have Account? <a href="/register">Register</a>
+                    Don't have An Account? <a href="/register">Register</a>
                 </div>
             </div>
         </div>
@@ -109,12 +109,12 @@ export function renderRegister() {
     `;
 }
 
-export async function handleSignIn(e) {
-    e.preventDefault();
+
+export function handleSignIn(e) {
+
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const remember = document.getElementById('remember').checked;
-
   
     try {
         const response = await fetch('http://localhost:8080/login', {
@@ -140,13 +140,53 @@ export async function handleSignIn(e) {
     }
 
 
-
     console.log('Signing in with:', { email, password, remember });
     alert('Isto vai para onde????');
     // Redirect to home after successful login
     window.history.pushState({}, '', '/');
     window.dispatchEvent(new PopStateEvent('popstate'));
+  
+    fetch("http://localhost:8080/jarvis/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password }),
+        mode: 'cors' // Required for cross-origin requests
+    })
+    .then(response => {
+        if (!response.ok) {
+            // Optional: handle errors visually
+            alert(" Login failed " + response.statusText);
+            return;
+        }
+        alert(" Login success " + response.statusText);
+
+        return response.text(); // Assuming the server returns plain text like "Login successful"
+    })
+    .then(data => {
+        if (!data) return;
+
+        // Store session
+        sessionStorage.setItem('user', JSON.stringify({ email: data.email }));
+
+        window.authState = {
+            isAuthenticated: true,
+            user: { email: data.email },
+        };
+
+            // Redirect
+        window.history.pushState({ email }, '', '/profile');
+        window.dispatchEvent(new PopStateEvent('popstate'));
+    })
+    .catch(error => {
+        console.error("Error during login:", error);
+        alert("An error occurred during login.");
+    });
+
 }
+
+
 
 export function handleRegister(e) {
     e.preventDefault();

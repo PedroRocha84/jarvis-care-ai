@@ -3,7 +3,7 @@ export function renderProfile() {
     const user = window.authState.user || {};
     
     main.innerHTML = `
-     <div class="profile-header">
+        <div class="profile-header">
                 <h1>Olá Raquel, </h1>
                 <a href="/medicines" class="btn btn-primary">
                     <i class="fas fa-medicine-alt"></i> View My Medicine
