@@ -1,4 +1,4 @@
-export async function renderMedicineInfo(viewType = 'daily') {
+export function renderMedicineInfo(viewType = 'daily') {
     const main = document.getElementById('main-content');
     const user = window.authState.user || {};
     const today = new Date();
@@ -9,60 +9,81 @@ export async function renderMedicineInfo(viewType = 'daily') {
         day: 'numeric' 
     });
 
-    medicineHeader();
-   
-        const response = await fetch('http://localhost:8080/jarvis/api/user/' + user.id + '/medicines')
-        .then(response =>{
-            console.log(response.json);
-            if (!response.ok) { throw new Error('Failed to fetch medicine data');}
-
-            return response.json();    
+    // Fetch request
+    fetch('http://localhost:8080/jarvis/api/user/' + user.id + '/medicines')
+        .then(response => {
+            if (!response.ok) { 
+                throw new Error('Failed to fetch medicine data');
+            }
+            return response.json(); // Parse the response JSON
         })
         .then(data => {
-            console.log(data);
+            console.log(data);  // Log the data to the console for debugging
+            
+            // Now, render the content
+            main.innerHTML = `
+            <div class="medicine-info-container">
+                <div class="medicine-info-header">
+                    <h1 class="medicine-info-title">Today's Medicine - ${formattedDate}</h1>
+                    <div class="view-switcher">
+                        <button class="view-btn ${viewType === 'daily' ? 'active' : ''}" data-view="daily">Daily</button>
+                        <button class="view-btn ${viewType === 'weekly' ? 'active' : ''}" data-view="weekly">Weekly</button>
+                        <button class="view-btn ${viewType === 'monthly' ? 'active' : ''}" data-view="monthly">Monthly</button>
+                    </div>
+                </div> 
+                
+                ${viewType === 'daily' ? `
+                <div class="events-list">
+                    ${data.length > 0 ? 
+                        data.map(event => `
+                            <div class="event-card event-${event.type}">
+                                <div class="event-time">
+                                    <span class="time">${event.time}</span>
+                                    <span class="duration">${event.lastDay}</span>
+                                </div>
+                                <div class="event-details">
+                                    <h3>${event.title}</h3>
+                                </div>
+                                <div class="event-actions">
+                                    <button class="event-btn details-btn" data-event="${event.id}">
+                                        <i class="fas fa-info-circle"></i> Edit
+                                    </button>
+                                    <button class="event-btn cancel-btn" data-event="${event.id}">
+                                        <i class="fas fa-times"></i> Remove
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('') : 
+                        `<div class="no-events">
+                            <i class="far fa-calendar-check"></i>
+                            <p>No events scheduled for today</p>
+                        </div>`
+                    }
+                </div>
+                ` : ''}
+                
+                ${viewType === 'weekly' ? `
+                <div class="calendar-view">
+                    <p>Weekly view coming soon</p>
+                </div>
+                ` : ''}
+                
+                ${viewType === 'monthly' ? `
+                <div class="calendar-view">
+                    <p>Monthly view coming soon</p>
+                </div>
+                ` : ''}
+                
+                <div class="quick-actions">
+                    <button class="quick-action-btn" data-action="new-appointment">
+                        <i class="fas fa-plus"></i> Add Medicine
+                    </button>
+                </div>
+            </div>
+        `;
         })
         .catch(error => {
+            console.error(error);  // Log the error to the console for debugging
             main.innerHTML = `<p class="error">Error fetching medicine data. Try later.</p>`;
-         })
-}
-
-
-export function medicineHeader(formattedDate, viewType) {
-    const medicineInfoContainer = document.createElement("div");
-    medicineInfoContainer.classList.add("medicine-info-container");
-
-    const medicineInfoHeader = document.createElement("div");
-    medicineInfoHeader.classList.add("medicine-info-header");
-
-    const medicineTitle = document.createElement("h1");
-    medicineTitle.classList.add("medicine-info-title");
-    medicineTitle.textContent = `Today's Medicine - ${formattedDate}`;
-
-    const viewSwitch = document.createElement("div");
-    viewSwitch.classList.add("view-switcher");
-
-    const buttonDaily = document.createElement("button");
-    buttonDaily.className = `view-btn ${viewType === 'daily' ? 'active' : ''}`;
-    buttonDaily.textContent = "Daily";
-
-    const buttonWeekly = document.createElement("button");
-    buttonWeekly.className = `view-btn ${viewType === 'weekly' ? 'active' : ''}`;
-    buttonWeekly.textContent = "Weekly";
-
-    const buttonMonthly = document.createElement("button");
-    buttonMonthly.className = `view-btn ${viewType === 'monthly' ? 'active' : ''}`;
-    buttonMonthly.textContent = "Monthly";
-
-    viewSwitch.appendChild(buttonDaily);
-    viewSwitch.appendChild(buttonWeekly);
-    viewSwitch.appendChild(buttonMonthly);
-
-    medicineInfoHeader.appendChild(medicineTitle);
-    medicineInfoHeader.appendChild(viewSwitch);
-
-    medicineInfoContainer.appendChild(medicineInfoHeader);
-
-    const main = document.getElementById('main-content');
-    main.innerHTML = ''; // clear old content
-    main.appendChild(medicineInfoContainer);
+        });
 }
