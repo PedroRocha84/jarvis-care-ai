@@ -31,8 +31,10 @@ export async function renderMedicineInfo(viewType = 'daily') {
 */
 
    
-        const response = await fetch('http://localhost:8080/api/${user.id}/medicines')
+        const response = await fetch('http://localhost:8080/jarvis/api/user/' + user.id + '/medicines',
+            {mode: 'cors'})
         .then(response =>{
+            console.log(response.json);
             if (!response.ok) { throw new Error('Failed to fetch medicine data');}
             return response.json();    
         })
@@ -46,7 +48,14 @@ export async function renderMedicineInfo(viewType = 'daily') {
 
     main.innerHTML = `
         <div class="medicine-info-container">
-            <div class="medicine-info-header">
+            
+        </div>
+    `;
+}
+
+function codigoRetirado(){
+/*
+<div class="medicine-info-header">
                 <h1 class="medicine-info-title">Today's Medicine - ${formattedDate}</h1>
                 <div class="view-switcher">
                     <button class="view-btn ${viewType === 'daily' ? 'active' : ''}" data-view="daily">Daily</button>
@@ -101,6 +110,6 @@ export async function renderMedicineInfo(viewType = 'daily') {
                     <i class="fas fa-plus"></i> Add Medicine
                 </button>
             </div>
-        </div>
-    `;
+
+            */
 }
