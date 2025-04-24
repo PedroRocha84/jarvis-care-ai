@@ -9,7 +9,6 @@ export function renderMedicineInfo(viewType = 'daily') {
         day: 'numeric' 
     });
 
-    // Fetch request
     fetch('http://localhost:8080/jarvis/api/user/' + user.id + '/medicines')
         .then(response => {
             if (!response.ok) { 
@@ -18,9 +17,8 @@ export function renderMedicineInfo(viewType = 'daily') {
             return response.json(); // Parse the response JSON
         })
         .then(data => {
-            console.log(data);  // Log the data to the console for debugging
+            console.log(data);  // Log the data to the console
             
-            // Now, render the content
             main.innerHTML = `
             <div class="medicine-info-container">
                 <div class="medicine-info-header">
