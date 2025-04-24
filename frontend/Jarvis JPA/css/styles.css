@@ -36,7 +36,7 @@ header {
 }
 
 #main-content {
-    padding: 2rem;
+
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -802,6 +802,13 @@ header {
   }
 }
 
+/* Container Dimension */
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 /* Hero Section */
 .hero-section {
     display: flex;
@@ -810,10 +817,14 @@ header {
     padding: 4rem 2rem;
     background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
     margin-bottom: 3rem;
+    gap: 1rem;
+    width: 90%;
 }
 
 .hero-content {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width: 600px;
 }
 
@@ -891,6 +902,7 @@ header {
     padding: 4rem 2rem;
     text-align: center;
     background-color: white;
+    width: 90%;a
 }
 
 .features-section h3 {
@@ -943,10 +955,14 @@ header {
 
 /* Awareness Section */
 .awareness-section {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
     padding: 5rem 2rem;
     background: linear-gradient(135deg, #8db2d6 0%, #6e8efb 100%);
     color: white;
     text-align: center;
+    width: 90%;
+    
 }
 
 .awareness-content {
@@ -985,6 +1001,14 @@ header {
 
 .btn-outline:hover {
     background-color: rgba(255,255,255,0.1);
+}
+
+
+/* FOOTER SECTION */
+
+.footer{
+    
+    margin: 3rem 0;
 }
 
 /* Responsive Styles */

@@ -41,11 +41,13 @@ function createHeader() {
 function createWrapper(){
     
     const wrapper = document.createElement('div');
+    wrapper.classList.add("footer")
 
     const nav = document.createElement('nav');
     nav.classList.add('navbar');
-    
+
     wrapper.appendChild(nav);
+
 
     nav.innerHTML = authState.isAuthenticated ? `
         <a href="/profile">My Profile</a>
