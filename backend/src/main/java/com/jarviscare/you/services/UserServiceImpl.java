@@ -155,6 +155,7 @@ public class UserServiceImpl implements UserService {
     public void setMedicalProcedureService(MedicalProcedureService medicalProcedureService) {
         this.medicalProcedureService = medicalProcedureService;
 
+    }
 
     @Autowired
     public void setMedicineService(MedicineServiceImpl medicineService) {
