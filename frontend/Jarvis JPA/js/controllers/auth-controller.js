@@ -18,7 +18,7 @@ function setupSignInListeners() {
     const signInBtn = document.querySelector('.signin-btn');
     if (signInBtn) {
         signInBtn.addEventListener('click', (e) => {
-       handleSignIn()
+        handleSignIn();
         });
     }
 }

@@ -29,7 +29,7 @@ export function renderSignIn() {
                 
                 <button class="signin-btn">SIGN IN</button>
                 <div class="create-account">
-                    Don't have An Account? <a href="/register">Register</a>
+                    Don't have Account? <a href="/register">Register</a>
                 </div>
             </div>
         </div>
@@ -109,54 +109,51 @@ export function renderRegister() {
     `;
 }
 
-
-export async function handleSignIn(e) {
+export async function handleSignIn() {
+    
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const remember = document.getElementById('remember').checked;
-   
-    fetch("http://localhost:8080/jarvis/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, password }),
-        mode: 'cors' // Required for cross-origin requests
-    })
-    .then(response => {
+
+    try {
+        const response = await fetch("http://localhost:8080/jarvis/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password }),
+            mode: 'cors'
+        });
+
         if (!response.ok) {
-            // Optional: handle errors visually
-            alert(" Login failed " + response.statusText);
+            alert("Login failed: " + response.statusText);
             return;
         }
-        alert(" Login success " + response.statusText);
+        
+        const data = await response.json(); // ✅ Expecting JSON from server
 
-        return response.text(); // Assuming the server returns plain text like "Login successful"
-    })
-    .then(data => {
-        if (!data) return;
+        const { id,firstName, email: userEmail } = data;
+        
+        // Store user info in session or local storage
+        const user = { id, firstName, email: userEmail };
+        sessionStorage.setItem('user', JSON.stringify(user));
 
-        // Store session
-        sessionStorage.setItem('user', JSON.stringify({ email: data.email }));
-
+        // Optional: global state
         window.authState = {
             isAuthenticated: true,
-            user: { email: data.email },
+            user
         };
 
-            // Redirect
-        window.history.pushState({ email }, '', '/profile');
+        // Redirect and pass user info (optional)
+        window.history.pushState(user, '', '/profile');
         window.dispatchEvent(new PopStateEvent('popstate'));
-    })
-    .catch(error => {
+
+    } catch (error) {
         console.error("Error during login:", error);
         alert("An error occurred during login.");
-    });
-
+    }
 }
-
-
 
 export function handleRegister(e) {
     e.preventDefault();
@@ -186,14 +183,3 @@ function validateRegistrationForm() {
     
     return true;
 }
-
-/*
-//ver onde colocar este logout (acopolado ao click do botao logout)
-export function handleLogout() {
-    
-    localStorage.removeItem('authToken');
-    alert("Logged out successfully");
-
-    window.history.pushState({}, '', '/signin');
-    window.dispatchEvent(new PopStateEvent('popstate'));
-}*/

@@ -4,9 +4,9 @@ export function renderProfile() {
     
     main.innerHTML = `
         <div class="profile-header">
-                <h1>Olá Raquel, </h1>
+                <h1>Olá ${user.firstName}, </h1>
                 <a href="/medicines" class="btn btn-primary">
-                    <i class="fas fa-medicine-alt"></i> View My Medicine
+                    <i class="fas fa-calendar-alt"> </i> View My Medicine
                 </a>
                 <a href="/dashboard" class="btn btn-primary">
                     <i class="fas fa-calendar-alt"></i> View My Schedule
@@ -24,7 +24,7 @@ export function renderProfile() {
                         <div class="avatar">
                             <i class="fas fa-user-circle"></i>
                         </div>
-                        <h2>${user.name || 'User'}</h2>
+                        <h2>${user.firstName || 'User'}</h2>
                         <p>${user.email || ''}</p>
                     </div>
                     
