@@ -29,7 +29,7 @@ export function renderSignIn() {
                 
                 <button class="signin-btn">SIGN IN</button>
                 <div class="create-account">
-                    Don't have Account? <a href="/register">Register</a>
+                    Don't have An Account? <a href="/register">Register</a>
                 </div>
             </div>
         </div>
@@ -110,14 +110,11 @@ export function renderRegister() {
 }
 
 export function handleSignIn(e) {
-    
+
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const remember = document.getElementById('remember').checked;
 
-    console.log(email);
-    console.log(password);
-    
     fetch("http://localhost:8080/jarvis/login", {
         method: "POST",
         headers: {
@@ -129,10 +126,11 @@ export function handleSignIn(e) {
     .then(response => {
         if (!response.ok) {
             // Optional: handle errors visually
-            alert("Login failed: " + response.statusText);
+            alert(" Login failed " + response.statusText);
             return;
         }
-        alert("Login success: " + response.statusText);
+        alert(" Login success " + response.statusText);
+
         return response.text(); // Assuming the server returns plain text like "Login successful"
     })
     .then(data => {
@@ -155,6 +153,8 @@ export function handleSignIn(e) {
         alert("An error occurred during login.");
     });
 }
+
+
 
 export function handleRegister(e) {
     e.preventDefault();

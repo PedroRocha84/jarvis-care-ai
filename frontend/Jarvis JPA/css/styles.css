@@ -801,3 +801,217 @@ header {
       gap: 1rem;
   }
 }
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+    margin-bottom: 3rem;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    color: #6e8efb;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.hero-image {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #6e8efb;
+    color: white;
+    border: 2px solid #6e8efb;
+}
+
+.btn-primary:hover {
+    background-color: #5a7df4;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(110, 142, 251, 0.3);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #6e8efb;
+    border: 2px solid #6e8efb;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(110, 142, 251, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Features Section */
+.features-section {
+    padding: 4rem 2rem;
+    text-align: center;
+    background-color: white;
+}
+
+.features-section h3 {
+    font-size: 1.5rem;
+    color: #6e8efb;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.feature-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: #f9fafc;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: #6e8efb;
+    margin-bottom: 1.5rem;
+}
+
+.feature-card h4 {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Awareness Section */
+.awareness-section {
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, #8db2d6 0%, #6e8efb 100%);
+    color: white;
+    text-align: center;
+}
+
+.awareness-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.awareness-section h3 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+}
+
+.awareness-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+.awareness-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 0.8rem 2rem;
+}
+
+.btn-outline:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 3rem 1rem;
+    }
+    
+    .hero-content {
+        margin-bottom: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .cta-buttons {
+        justify-content: center;
+    }
+    
+    .awareness-section h2 {
+        font-size: 2rem;
+    }
+}
