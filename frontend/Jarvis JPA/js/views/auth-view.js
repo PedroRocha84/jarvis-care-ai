@@ -130,6 +130,7 @@ export function handleSignIn(e) {
             return;
         }
         alert(" Login success " + response.statusText);
+
         return response.text(); // Assuming the server returns plain text like "Login successful"
     })
     .then(data => {
