@@ -11,6 +11,10 @@ export default {
         path: '/signin',
         controller: 'auth-controller'
     },
+    assistant: {
+        path: '/assistant',
+        controller: 'assistant-controller'
+    },
     register: {
         path: '/register',
         controller: 'auth-controller'

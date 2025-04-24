@@ -50,11 +50,14 @@ function createWrapper(){
     nav.innerHTML = authState.isAuthenticated ? `
         <a href="/profile">My Profile</a>
         <a href="/dashboard">My Schedule</a>
+        <a href="/assistant">Care Assistant</a>
         <a href="/logout">Logout</a>
     ` : `
         <a href="/">Home</a>
         <a href="/signin">Sign In</a>
 
+        <a href="/register">Register</a>
+        <a href="/assistant">Care Assistant</a>
     `;
     
     nav.querySelectorAll('a').forEach(link => {
@@ -62,7 +65,6 @@ function createWrapper(){
             link.classList.add('active');
         }
     });
-
   
 
     return wrapper;
