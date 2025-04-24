@@ -110,42 +110,12 @@ export function renderRegister() {
 }
 
 
-export function handleSignIn(e) {
+export async function handleSignIn(e) {
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const remember = document.getElementById('remember').checked;
-  
-    try {
-        const response = await fetch('http://localhost:8080/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id, email, password })
-        });
-
-        if (!response.ok) throw new Error('Login failed.');
-
-        const data = await response.json();
-
-     //   localStorage.setItem('authToken', data.token); 
-
-        window.authState = {
-            user: data.user
-        };
-
-
-    } catch (err) {
-        console.error('Login error:', err);
-        alert('Invalid login. Check your data.');
-    }
-
-
-    console.log('Signing in with:', { email, password, remember });
-    alert('Isto vai para onde????');
-    // Redirect to home after successful login
-    window.history.pushState({}, '', '/');
-    window.dispatchEvent(new PopStateEvent('popstate'));
-  
+   
     fetch("http://localhost:8080/jarvis/login", {
         method: "POST",
         headers: {
