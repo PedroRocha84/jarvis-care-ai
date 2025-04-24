@@ -120,14 +120,15 @@ export async function handleSignIn(e) {
         const response = await fetch('http://localhost:8080/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ id, email, password })
         });
 
-        if (!response.ok) throw new Error('Login falhou');
+        if (!response.ok) throw new Error('Login failed.');
 
         const data = await response.json();
 
-        // ⚡ Guardar só o user no estado global
+     //   localStorage.setItem('authToken', data.token); 
+
         window.authState = {
             user: data.user
         };
@@ -175,3 +176,14 @@ function validateRegistrationForm() {
     
     return true;
 }
+
+/*
+//ver onde colocar este logout (acopolado ao click do botao logout)
+export function handleLogout() {
+    
+    localStorage.removeItem('authToken');
+    alert("Logged out successfully");
+
+    window.history.pushState({}, '', '/signin');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+}*/

@@ -8,7 +8,8 @@ export async function renderMedicineInfo(viewType = 'daily') {
         day: 'numeric' 
     });
 
-    const userId = window.authState?.user?.id;
+/*
+    const userId = window.authState.user?.id;
     let medicines = [];
 
     if (!userId) {
@@ -16,11 +17,20 @@ export async function renderMedicineInfo(viewType = 'daily') {
         //main.innerHTML = `<p class="error">User not logged in</p>`;
         return;
     }
+    //aqui
+    const token = localStorage.getItem('authToken'); 
 
+    if (!token) {
+        alert("You need to be authenticated to view this information.");
+        return;
+    }
+    //ate aqui, retirar?
+*/
     try {
-        const response = await fetch('http://localhost:8080/api/user/${userId}/medicines');
+        const response = await fetch('http://localhost:8080/api/user/1/medicines');
         if (!response.ok) throw new Error('Failed to fetch medicine data');
-        medicines = await response.json();
+        const medicines = await response.json();
+        console.log(medicines);
     } catch (error) {
         console.error('Error fetching medicine data:', error);
         main.innerHTML = `<p class="error">Error fetching medicine data. Try later.</p>`;
