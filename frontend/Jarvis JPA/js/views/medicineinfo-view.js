@@ -1,5 +1,6 @@
 export async function renderMedicineInfo(viewType = 'daily') {
     const main = document.getElementById('main-content');
+    const user = window.authState.user || {};
     const today = new Date();
     const formattedDate = today.toLocaleDateString('en-US', { 
         weekday: 'long', 
@@ -7,6 +8,8 @@ export async function renderMedicineInfo(viewType = 'daily') {
         month: 'long', 
         day: 'numeric' 
     });
+
+    
 
 /*
     const userId = window.authState.user?.id;
@@ -26,17 +29,20 @@ export async function renderMedicineInfo(viewType = 'daily') {
     }
     //ate aqui, retirar?
 */
-    try {
-        const response = await fetch('http://localhost:8080/api/user/1/medicines');
-        if (!response.ok) throw new Error('Failed to fetch medicine data');
-        const medicines = await response.json();
-        console.log(medicines);
-    } catch (error) {
-        console.error('Error fetching medicine data:', error);
-        main.innerHTML = `<p class="error">Error fetching medicine data. Try later.</p>`;
-        return;
-    }
 
+   
+        const response = await fetch('http://localhost:8080/api/${user.id}/medicines')
+        .then(response =>{
+            if (!response.ok) { throw new Error('Failed to fetch medicine data');}
+            return response.json();    
+        })
+        .then(data => {
+            console.log(data);  // Handle the response data here
+        })
+        .catch(error => {
+            main.innerHTML = `<p class="error">Error fetching medicine data. Try later.</p>`;
+         })
+        
 
     main.innerHTML = `
         <div class="medicine-info-container">
