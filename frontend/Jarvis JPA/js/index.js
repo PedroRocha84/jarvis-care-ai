@@ -16,11 +16,10 @@ function init() {
     const app = document.getElementById('app');
 
     const header = createHeader();
-    const main = document.createElement('main');
-    main.id = 'main-content';
-
+    const wrapper = createWrapper();
+    
     app.appendChild(header);
-    app.appendChild(main);
+    app.appendChild(wrapper);
 }
 
 function createHeader() {
@@ -29,9 +28,25 @@ function createHeader() {
     const pageTitle = document.createElement('h1');
     pageTitle.textContent = 'CARE AI';
 
+    const main = document.createElement('main');
+    main.id = 'main-content';
+
+   
+    header.appendChild(pageTitle);
+    header.appendChild(main);
+
+    return header;
+}
+
+function createWrapper(){
+    
+    const wrapper = document.createElement('div');
+
     const nav = document.createElement('nav');
     nav.classList.add('navbar');
     
+    wrapper.appendChild(nav);
+
     nav.innerHTML = authState.isAuthenticated ? `
         <a href="/profile">My Profile</a>
         <a href="/dashboard">My Schedule</a>
@@ -40,18 +55,17 @@ function createHeader() {
     ` : `
         <a href="/">Home</a>
         <a href="/signin">Sign In</a>
+
         <a href="/register">Register</a>
         <a href="/assistant">Care Assistant</a>
     `;
-
-    header.appendChild(pageTitle);
-    header.appendChild(nav);
     
     nav.querySelectorAll('a').forEach(link => {
         if (link.pathname === window.location.pathname) {
             link.classList.add('active');
         }
     });
+  
 
-    return header;
+    return wrapper;
 }

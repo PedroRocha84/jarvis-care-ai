@@ -14,6 +14,7 @@ header {
     text-align: center;
 }
 
+
 .navbar {
     display: flex;
     justify-content: center;
@@ -22,7 +23,7 @@ header {
 }
 
 .navbar a {
-    color: white;
+    color: #8db2d6;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -30,13 +31,22 @@ header {
 }
 
 .navbar a:hover {
-    background-color: #9bb8d4;
+    background-color: rgba(133, 174, 209, 0.445);
+    color: white;
 }
 
 #main-content {
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main-content h1{
+    text-align: center;
+    font-size: 2.5em;
 }
 
 /* Auth Styles */
