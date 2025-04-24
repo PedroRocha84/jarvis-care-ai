@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/")
@@ -22,7 +25,7 @@ public class LoginController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
+    public ResponseEntity<?> login(@RequestBody User user) {
         String email = user.getEmail();
         String password = user.getPassword();
 
@@ -36,7 +39,14 @@ public class LoginController {
 
             if (internalUser.getEmail().equals(email) &&
                     PasswordManager.checkPassword(password, internalUser.getPassword())) {
-                return new ResponseEntity<>("Login successful", HttpStatus.OK);
+
+                // ✅ Return a JSON response with id and email
+                Map<String, Object> responseBody = new HashMap<>();
+                responseBody.put("id", internalUser.getId());
+                responseBody.put("email", internalUser.getEmail());
+                responseBody.put("firstName", internalUser.getFirstname());
+
+                return new ResponseEntity<>(responseBody, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
             }
