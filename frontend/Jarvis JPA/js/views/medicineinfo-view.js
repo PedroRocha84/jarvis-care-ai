@@ -19,6 +19,10 @@ export function renderMedicineInfo(viewType = 'daily') {
         .then(data => {
             console.log(data);  // Log the data to the console
             
+            const today = new Date();
+            const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const currentWeekDay = weekDays[today.getDay()];
+            
             main.innerHTML = `
             <div class="medicine-info-container">
                 <div class="medicine-info-header">
@@ -30,28 +34,47 @@ export function renderMedicineInfo(viewType = 'daily') {
                     </div>
                 </div> 
                 
-                ${viewType === 'daily' ? `
-                <div class="events-list">
-                    ${data.length > 0 ? 
-                        data.map(event => `
-                            <div class="event-card event-${event.type}">
-                                <div class="event-time">
-                                    <span class="time">${event.time}</span>
-                                    <span class="duration">${event.lastDay}</span>
-                                </div>
-                                <div class="event-details">
-                                    <h3>${event.title}</h3>
-                                </div>
-                                <div class="event-actions">
-                                    <button class="event-btn details-btn" data-event="${event.id}">
-                                        <i class="fas fa-info-circle"></i> Edit
-                                    </button>
-                                    <button class="event-btn cancel-btn" data-event="${event.id}">
-                                        <i class="fas fa-times"></i> Remove
-                                    </button>
-                                </div>
-                            </div>
-                        `).join('') : 
+            ${viewType === 'daily' ? `
+            <div class="events-list">
+                ${data.length > 0 ? 
+                    data.flatMap(medicine => {
+                        if (!medicine.medicineWeekDays || medicine.medicineWeekDays.includes(currentWeekDay)) {
+                            return medicine.medicineHours.map(hour => ({
+                                hour: hour,
+                                medicine: medicine
+                            }));
+                        } else {
+                            return [];
+            }
+        })
+            // Sort by time
+            .sort((a, b) => {
+                // Convert time strings to Date objects for comparison
+                const timeA = new Date(`2000-01-01T${a.hour}`);
+                const timeB = new Date(`2000-01-01T${b.hour}`);
+                return timeA - timeB;
+            })
+            // map to HTML after ordering
+            .map(item => `
+                <div class="event-card event-${item.medicine.type}">
+                    <div class="event-time">
+                        <span class="time">${item.hour}</span>
+                    </div>
+                    <div class="event-details">
+                        <h3>${item.medicine.medicineName}</h3>
+                        <span class="dosage">${item.medicine.medicineDosage}</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="event-btn details-btn" data-event="${item.medicine.id}">
+                            <i class="fas fa-info-circle"></i> Edit
+                        </button>
+                        <button class="event-btn cancel-btn" data-event="${item.medicine.id}">
+                            <i class="fas fa-times"></i> Remove
+                        </button>
+                    </div>
+                </div>
+                        `).join('') 
+                        : 
                         `<div class="no-events">
                             <i class="far fa-calendar-check"></i>
                             <p>No events scheduled for today</p>
@@ -59,12 +82,12 @@ export function renderMedicineInfo(viewType = 'daily') {
                     }
                 </div>
                 ` : ''}
-                
-                ${viewType === 'weekly' ? `
-                <div class="calendar-view">
-                    <p>Weekly view coming soon</p>
-                </div>
-                ` : ''}
+                    
+                    ${viewType === 'weekly' ? `
+                    <div class="calendar-view">
+                        <p>Weekly view coming soon</p>
+                    </div>
+                    ` : ''}
                 
                 ${viewType === 'monthly' ? `
                 <div class="calendar-view">
