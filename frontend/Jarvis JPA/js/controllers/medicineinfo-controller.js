@@ -28,12 +28,22 @@ function setupMedicineInfoListeners() {
             removeMedicine(eventId);
         }
         
-        if (e.target.classList.contains('quick-action-btn') || 
+     /*   if (e.target.classList.contains('quick-action-btn') || 
             e.target.closest('.quick-action-btn')) {
             const action = e.target.getAttribute('data-action') || 
                          e.target.closest('.quick-action-btn').getAttribute('data-action');
             handleQuickAction(action);
-        }
+        }*/
+
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('quick-action-btn') || e.target.closest('.quick-action-btn')) {
+                const action = e.target.getAttribute('data-action') || e.target.closest('.quick-action-btn').getAttribute('data-action');
+        
+                if (action === 'new-appointment') {
+                    window.location.href = 'http://localhost:8080/jarvis/api/medicineform'; 
+                }
+            }
+        });
         
     });
 }
@@ -50,8 +60,8 @@ function removeMedicine(eventId) {
         setupMedicineInfoListeners();
     }
 }
-
+/*
 function handleQuickAction(action) {  
     alert('Redirecting to new new medicine form');
     // window.location.href = '/new-medicine';
-}
+}*/
