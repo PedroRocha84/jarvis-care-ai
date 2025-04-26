@@ -10,16 +10,90 @@ export function renderMedicineInfo(viewType = 'daily') {
     });
 
     fetch('http://localhost:8080/jarvis/api/user/' + user.id + '/medicines')
-        .then(response => {
-            if (!response.ok) { 
-                throw new Error('Failed to fetch medicine data');
+    .then(response => {
+        if (!response.ok) { 
+            throw new Error('Failed to fetch medicine data');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+
+        const today = new Date();
+        const formattedToday = today.toISOString().split('T')[0];
+
+        const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const currentWeekDay = weekDays[today.getDay()];
+
+        // prepare list of medicines
+        let eventsHTML = '';
+
+        if (data.length > 0) {
+            const medicinesForToday = data.flatMap(medicine => {
+                const isExpired = medicine.lastDayOfMedicine && new Date(medicine.lastDayOfMedicine) < today;
+                if (isExpired) {
+                    console.log(`Medicamento ${medicine.medicineName} expirou em ${medicine.lastDayOfMedicine}`);
+                    return []; 
+                }
+
+                const isDayMatch = !medicine.medicineWeekDays || 
+                                   !medicine.medicineWeekDays.length || 
+                                   medicine.medicineWeekDays.includes(currentWeekDay);
+
+                if (isDayMatch) {
+                    return medicine.medicineHours.map(hour => ({
+                        hour: hour,
+                        medicine: medicine
+                    }));
+                }
+                return [];
+            });
+
+            if (medicinesForToday.length > 0) {
+                eventsHTML = medicinesForToday
+                    .sort((a, b) => {
+                        const timeA = new Date(`2000-01-01T${a.hour}`);
+                        const timeB = new Date(`2000-01-01T${b.hour}`);
+                        return timeA - timeB;
+                    })
+                    .map(item => `
+                        <div class="event-card event-${item.medicine.type || 'default'}">
+                            <div class="event-time">
+                                <span class="time">${item.hour}</span>
+                            </div>
+                            <div class="event-details">
+                                <h3>${item.medicine.medicineName}</h3>
+                                <span class="dosage">${item.medicine.medicineDosage}</span>
+                            </div>
+                            <div class="event-actions">
+                                <button class="event-btn details-btn" data-event="${item.medicine.id}">
+                                    <i class="fas fa-info-circle"></i> Edit
+                                </button>
+                                <button class="event-btn cancel-btn" data-event="${item.medicine.id}">
+                                    <i class="fas fa-times"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    `)
+                    .join('');
+            } else {
+                eventsHTML = `
+                    <div class="no-events">
+                        <i class="far fa-calendar-check"></i>
+                        <p>No events scheduled for today</p>
+                    </div>
+                `;
             }
-            return response.json(); // Parse the response JSON
-        })
-        .then(data => {
-            console.log(data);  // Log the data to the console
-            
-            main.innerHTML = `
+        } else {
+            eventsHTML = `
+                <div class="no-events">
+                    <i class="far fa-calendar-check"></i>
+                    <p>No events scheduled for today</p>
+                </div>
+            `;
+        }
+
+        main.innerHTML = `
             <div class="medicine-info-container">
                 <div class="medicine-info-header">
                     <h1 class="medicine-info-title">Today's Medicine - ${formattedDate}</h1>
@@ -31,47 +105,23 @@ export function renderMedicineInfo(viewType = 'daily') {
                 </div> 
                 
                 ${viewType === 'daily' ? `
-                <div class="events-list">
-                    ${data.length > 0 ? 
-                        data.map(event => `
-                            <div class="event-card event-${event.type}">
-                                <div class="event-time">
-                                    <span class="time">${event.time}</span>
-                                    <span class="duration">${event.lastDay}</span>
-                                </div>
-                                <div class="event-details">
-                                    <h3>${event.title}</h3>
-                                </div>
-                                <div class="event-actions">
-                                    <button class="event-btn details-btn" data-event="${event.id}">
-                                        <i class="fas fa-info-circle"></i> Edit
-                                    </button>
-                                    <button class="event-btn cancel-btn" data-event="${event.id}">
-                                        <i class="fas fa-times"></i> Remove
-                                    </button>
-                                </div>
-                            </div>
-                        `).join('') : 
-                        `<div class="no-events">
-                            <i class="far fa-calendar-check"></i>
-                            <p>No events scheduled for today</p>
-                        </div>`
-                    }
-                </div>
+                    <div class="events-list">
+                        ${eventsHTML}
+                    </div>
                 ` : ''}
-                
+
                 ${viewType === 'weekly' ? `
-                <div class="calendar-view">
-                    <p>Weekly view coming soon</p>
-                </div>
+                    <div class="calendar-view">
+                        <p>Weekly view coming soon</p>
+                    </div>
                 ` : ''}
-                
+
                 ${viewType === 'monthly' ? `
-                <div class="calendar-view">
-                    <p>Monthly view coming soon</p>
-                </div>
+                    <div class="calendar-view">
+                        <p>Monthly view coming soon</p>
+                    </div>
                 ` : ''}
-                
+
                 <div class="quick-actions">
                     <button class="quick-action-btn" data-action="new-appointment">
                         <i class="fas fa-plus"></i> Add Medicine
@@ -79,9 +129,9 @@ export function renderMedicineInfo(viewType = 'daily') {
                 </div>
             </div>
         `;
-        })
-        .catch(error => {
-            console.error(error);  // Log the error to the console for debugging
-            main.innerHTML = `<p class="error">Error fetching medicine data. Try later.</p>`;
-        });
+    })
+    .catch(error => {
+        console.error(error);
+        main.innerHTML = `<p class="error">Error fetching medicine data. Try later.</p>`;
+    });
 }

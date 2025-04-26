@@ -537,6 +537,11 @@ header {
     gap: 0.5rem;
 }
 
+.event-details .dosage {
+    font-size: 1.0rem;
+    color: #777;
+}
+
 .event-actions {
     display: flex;
     gap: 0.5rem;
