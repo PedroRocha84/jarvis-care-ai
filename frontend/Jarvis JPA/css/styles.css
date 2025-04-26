@@ -23,7 +23,7 @@ header {
 }
 
 .navbar a {
-    color: #8db2d6;
+    color: #2f3031;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -32,7 +32,7 @@ header {
 
 .navbar a:hover {
     background-color: rgba(133, 174, 209, 0.445);
-    color: white;
+    color: rgb(192, 185, 185);
 }
 
 #main-content {
@@ -902,7 +902,7 @@ header {
     padding: 4rem 2rem;
     text-align: center;
     background-color: white;
-    width: 90%;a
+    width: 90%;
 }
 
 .features-section h3 {

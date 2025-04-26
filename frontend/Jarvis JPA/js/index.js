@@ -26,7 +26,7 @@ function createHeader() {
     const header = document.createElement('header');
 
     const pageTitle = document.createElement('h1');
-    pageTitle.textContent = 'CARE AI';
+    pageTitle.textContent = '';
 
     const main = document.createElement('main');
     main.id = 'main-content';
