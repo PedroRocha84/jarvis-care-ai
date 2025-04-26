@@ -1,21 +1,5 @@
 import { renderAssistant, addMessage, showContactPrompt } from '../views/assistant-view.js';
 
-// Sample knowledge base
-const KNOWLEDGE_BASE = {
-    treatments: {
-        "physical therapy": "Physical therapy typically involves 8-12 sessions over 4-6 weeks, depending on your condition.",
-        "chemotherapy": "Chemotherapy treatment plans vary but often involve cycles of treatment followed by recovery periods."
-    },
-    consultations: {
-        "schedule consultation": "You can schedule a consultation through your dashboard or by calling our office.",
-        "prepare for consultation": "Bring your medical history, current medications, and any test results to your consultation."
-    },
-    exams: {
-        "blood test": "For most blood tests, fasting for 8-12 hours is required. Check with your doctor for specific instructions.",
-        "mri": "MRI exams typically take 30-60 minutes. Remove all metal objects before the procedure."
-    }
-};
-
 export function init() {
     renderAssistant();
     setupEventListeners();
@@ -32,34 +16,59 @@ function setupEventListeners() {
     });
 }
 
-function handleUserMessage() {
+async function handleUserMessage() {
     const input = document.getElementById('user-input');
     const question = input.value.trim();
     
     if (question) {
         addMessage(question, true);
         input.value = '';
-        processQuestion(question);
+        
+        // Show loading indicator
+        const loadingMsg = addMessage("Thinking...", false);
+        
+        try {
+            const response = await queryAssistantAPI(question);
+            // Remove loading message
+            document.getElementById('chat-container').removeChild(loadingMsg);
+            
+            if (response.answer) {
+                addMessage(response.answer);
+            } else {
+                showContactPrompt();
+            }
+        } catch (error) {
+            document.getElementById('chat-container').removeChild(loadingMsg);
+            addMessage("Sorry, I'm having trouble connecting to the service. Please try again later.");
+            console.error('API Error:', error);
+        }
     }
 }
 
-function processQuestion(question) {
-    // Simple processing - in a real app you might use NLP here
-    const lowerQuestion = question.toLowerCase();
-    let foundAnswer = false;
+async function queryAssistantAPI(question) {
+    // Replace with your actual API endpoint
+    const API_URL = 'http://localhost:8080/jarvis/api/assistant';
+    
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${window.authState.token || ''}`
+            },
+            body: JSON.stringify({
+                question: question,
+                userId: window.authState.user?.id
+            })
+        });
 
-    // Check each category in the knowledge base
-    for (const category in KNOWLEDGE_BASE) {
-        for (const keyword in KNOWLEDGE_BASE[category]) {
-            if (lowerQuestion.includes(keyword)) {
-                addMessage(KNOWLEDGE_BASE[category][keyword]);
-                foundAnswer = true;
-                return;
-            }
+        if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`);
         }
-    }
 
-    if (!foundAnswer) {
-        showContactPrompt();
+        return await response.json();
+    } catch (error) {
+        console.error('Error querying assistant API:', error);
+        throw error;
     }
 }
