@@ -25,7 +25,9 @@ function setupProfileListeners() {
     document.querySelectorAll('.profile-menu a').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            alert(`Would navigate to ${e.target.getAttribute('href')}`);
+            const path = e.target.getAttribute('href');
+            window.history.pushState({}, '', path);
+            window.dispatchEvent(new PopStateEvent('popstate'));
         });
     });
 }

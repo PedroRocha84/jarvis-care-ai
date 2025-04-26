@@ -34,5 +34,13 @@ export default {
     medicineinfo: {
         path: '/medicines',
         controller: 'medicineinfo-controller'
-    }
+    },
+    health: {
+        path: '/health',
+        controller: 'health-controller'
+    },
+    healthMood: {
+        path: '/health/mood',
+        controller: 'health-controller'
+    },
 };
