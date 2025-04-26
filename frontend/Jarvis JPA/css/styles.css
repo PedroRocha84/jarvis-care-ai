@@ -8,7 +8,7 @@ body {
 }
 
 header {
-    background-color: #8db2d6;
+    background-color: #a2b4c5;
     color: white;
     padding: 1rem;
     text-align: center;
@@ -19,7 +19,10 @@ header {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 1rem;
+    padding: 0.5rem 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .navbar a {
@@ -28,10 +31,12 @@ header {
     padding: 0.5rem 1rem;
     border-radius: 4px;
     transition: background-color 0.3s;
+    font-weight: 500;
 }
 
+
 .navbar a:hover {
-    background-color: rgba(133, 174, 209, 0.445);
+    background-color: rgba(177, 212, 243, 0.445);
     color: rgb(192, 185, 185);
 }
 
