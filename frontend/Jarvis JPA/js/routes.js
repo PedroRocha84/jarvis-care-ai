@@ -23,6 +23,10 @@ export default {
         path: '/profile',
         controller: 'profile-controller'
     },
+    profileSettings: {
+        path: '/profile/settings',
+        controller: 'profile-controller'
+    },
     logout: {
         path: '/logout',
         controller: 'auth-controller'
@@ -34,5 +38,13 @@ export default {
     medicineinfo: {
         path: '/medicines',
         controller: 'medicineinfo-controller'
+    },
+    health: {
+        path: '/health',
+        controller: 'health-controller'
+    },
+    healthMood: {
+        path: '/health/mood',
+        controller: 'health-controller'
     }
 };

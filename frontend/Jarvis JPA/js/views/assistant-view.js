@@ -3,8 +3,8 @@ export function renderAssistant() {
     main.innerHTML = `
         <div class="assistant-container">
             <div class="assistant-header">
-                <h2><i class="fas fa-robot"></i> Care Assistant</h2>
-                <p>Ask me about treatments, consultations, or exams</p>
+                <h2><i class="fas fa-robot"></i> Care Assistant by J.A.R.V.I.S</h2>
+                <p>Ask me about treatments, consultations, or exams.</p>
             </div>
             
             <div class="chat-container" id="chat-container">
@@ -36,8 +36,8 @@ export function showContactPrompt() {
         <div class="contact-prompt">
             <p>I couldn't find an answer to your question. Please contact our healthcare team:</p>
             <ul>
-                <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                <li><i class="fas fa-envelope"></i> support@careai.example</li>
+                <li><i class="fas fa-phone"></i> +351 91999999</li>
+                <li><i class="fas fa-envelope"></i> support_class04@codejarvis.com</li>
                 <li><i class="fas fa-calendar-alt"></i> <a href="/dashboard">Schedule a consultation</a></li>
             </ul>
         </div>

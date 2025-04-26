@@ -7,7 +7,7 @@ export function render() {
                 <h2>Your Personal Health Companion</h2>
                 <p class="hero-description">AI-powered healthcare solutions for better well-being</p>
                 <div class="cta-buttons">
-                    <a href="/signin" class="btn btn-primary">Get Started</a>
+                    <a href="/signin" class="btn btn-primary">Sign In</a>
                     <a href="#learn-more" class="btn btn-secondary">Learn More</a>
                 </div>
             </div>
