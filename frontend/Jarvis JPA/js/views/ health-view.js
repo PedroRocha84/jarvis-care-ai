@@ -70,7 +70,7 @@ export function renderMoodTracker() {
         </section>
     `;
     
-    // Load any existing mood data
+
     loadMoodHistory();
     addHealthStyles();
 }
@@ -86,7 +86,7 @@ function loadMoodHistory() {
         }
         
         let html = '<ul>';
-        const sortedDates = Object.keys(moodData).sort().reverse().slice(0, 5); // Show last 5 entries
+        const sortedDates = Object.keys(moodData).sort().reverse().slice(0, 5);
         
         sortedDates.forEach(date => {
             const mood = moodData[date];
