@@ -172,7 +172,7 @@ export function handleRegister(e) {
     window.dispatchEvent(new PopStateEvent('popstate'));
 }
 
-function validateRegistrationForm() {
+function validateRegistration() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
     

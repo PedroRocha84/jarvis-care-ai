@@ -559,7 +559,7 @@ header {
     transition: background-color 0.3s;
 }
 
-.details-btn {
+.details-btn .save-btn{
     background: #f0f4ff;
     color: #6e8efb;
 }
