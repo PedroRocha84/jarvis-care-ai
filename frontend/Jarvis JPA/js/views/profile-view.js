@@ -1,56 +1,131 @@
 export function renderProfile() {
     const main = document.getElementById('main-content');
+    main.innerHTML = "";
+
     const user = window.authState.user || {};
     
-    main.innerHTML = `
-        <div class="profile-header">
-            <h1>Olá ${user.firstName}, </h1>
-            <a href="/medicines" class="btn btn-primary">
-                <i class="fas fa-calendar-alt"> </i> View My Medicine
-            </a>
-            <a href="/dashboard" class="btn btn-primary">
-                <i class="fas fa-calendar-alt"></i> View My Schedule
-            </a>
-        </div>
-        <div class="profile-container">
-            <div class="aiquote">
-                <h2>"Embrace each day with courage; your strength is the light guiding you to healing."</h2>
-            </div>
-            <div class="profile-content">
-                <div class="profile-sidebar">
-                    <div class="profile-summary">
-                        <div class="avatar">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <h2>${user.firstName || 'User'}</h2>
-                        <p>${user.email || ''}</p>
-                    </div>
-                    
-                    <nav class="profile-menu">
-                        <a href="/profile" class="active"><i class="fas fa-user"></i> Personal Info</a>
-                        <a href="/health"><i class="fas fa-heartbeat"></i> Health Dashboard</a>
-                        <a href="/profile/settings"><i class="fas fa-cog"></i> Settings</a>
-                    </nav>
-                </div>
-                <div class="profile-details">
-                    <div class="card">
-                        <h3><i class="fas fa-info-circle"></i> Personal Information</h3>
-                        <div class="detail-item">
-                            <label>Full Name</label>
-                            <p>${user.name || 'Not specified'}</p>
-                        </div>
-                        <div class="detail-item">
-                            <label>Email</label>
-                            <p>${user.email || 'Not specified'}</p>
-                        </div>
-                        <button class="btn btn-edit">
-                            <i class="fas fa-edit"></i> Edit Profile
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
+    const profileHeader = document.createElement('div');
+    profileHeader.className = 'profile-header';
+
+    const greeting = document.createElement('h1');
+    greeting.textContent = `Olá ${user.firstName},`;
+    profileHeader.appendChild(greeting);
+
+    const viewMedicinesBtn = document.createElement('a');
+    viewMedicinesBtn.href = '/medicines';
+    viewMedicinesBtn.className = 'btn btn-primary';
+    const medIcon = document.createElement('i');
+    medIcon.className = 'fas fa-calendar-alt';
+    viewMedicinesBtn.append(medIcon, ' View My Medicine');
+
+    const viewScheduleBtn = document.createElement('a');
+    viewScheduleBtn.href = '/dashboard';
+    viewScheduleBtn.className = 'btn btn-primary';
+    const schedIcon = document.createElement('i');
+    schedIcon.className = 'fas fa-calendar-alt';
+    viewScheduleBtn.append(schedIcon, ' View My Schedule');
+
+    profileHeader.append(viewMedicinesBtn, viewScheduleBtn);
+
+    const profileContainer = document.createElement('div');
+    profileContainer.className = 'profile-container';
+
+    const aiQuote = document.createElement('div');
+    aiQuote.className = 'aiquote';
+    const quote = document.createElement('h2');
+    quote.textContent = `"Embrace each day with courage; your strength is the light guiding you to healing."`;
+    aiQuote.appendChild(quote);
+
+    const profileContent = document.createElement('div');
+    profileContent.className = 'profile-content';
+
+    const profileSidebar = document.createElement('div');
+    profileSidebar.className = 'profile-sidebar';
+
+    const profileSummary = document.createElement('div');
+    profileSummary.className = 'profile-summary';
+
+    const avatar = document.createElement('div');
+    avatar.className = 'avatar';
+    const avatarIcon = document.createElement('i');
+    avatarIcon.className = 'fas fa-user-circle';
+    avatar.appendChild(avatarIcon);
+
+    const sidebarName = document.createElement('h2');
+    sidebarName.textContent = user.firstName || 'User';
+
+    const sidebarEmail = document.createElement('p');
+    sidebarEmail.textContent = user.email || '';
+
+    profileSummary.append(avatar, sidebarName, sidebarEmail);
+
+    const profileMenu = document.createElement('nav');
+    profileMenu.className = 'profile-menu';
+
+    const linkProfile = document.createElement('a');
+    linkProfile.href = '/profile';
+    linkProfile.className = 'active';
+    const iconProfile = document.createElement('i');
+    iconProfile.className = 'fas fa-user';
+    linkProfile.append(iconProfile, ' Personal Info');
+
+    const linkHealth = document.createElement('a');
+    linkHealth.href = '/health';
+    const iconHealth = document.createElement('i');
+    iconHealth.className = 'fas fa-heartbeat';
+    linkHealth.append(iconHealth, ' Health Dashboard');
+
+    const linkSettings = document.createElement('a');
+    linkSettings.href = '/profile/settings';
+    const iconSettings = document.createElement('i');
+    iconSettings.className = 'fas fa-cog';
+    linkSettings.append(iconSettings, ' Settings');
+
+    profileMenu.append(linkProfile, linkHealth, linkSettings);
+
+    profileSidebar.append(profileSummary, profileMenu);
+
+    const profileDetails = document.createElement('div');
+    profileDetails.className = 'profile-details';
+
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const cardTitle = document.createElement('h3');
+    const infoIcon = document.createElement('i');
+    infoIcon.className = 'fas fa-info-circle';
+    cardTitle.append(infoIcon, ' Personal Information');
+
+    const detailItem1 = document.createElement('div');
+    detailItem1.className = 'detail-item';
+    const labelName = document.createElement('label');
+    labelName.textContent = 'Full Name';
+    const nameValue = document.createElement('p');
+    nameValue.textContent = user.name || 'Not specified';
+    detailItem1.append(labelName, nameValue);
+
+    const detailItem2 = document.createElement('div');
+    detailItem2.className = 'detail-item';
+    const labelEmail = document.createElement('label');
+    labelEmail.textContent = 'Email';
+    const emailValue = document.createElement('p');
+    emailValue.textContent = user.email || 'Not specified';
+    detailItem2.append(labelEmail, emailValue);
+
+    const editButton = document.createElement('button');
+    editButton.className = 'btn btn-edit';
+    const editIcon = document.createElement('i');
+    editIcon.className = 'fas fa-edit';
+    editButton.append(editIcon, ' Edit Profile');
+
+    card.append(cardTitle, detailItem1, detailItem2, editButton);
+    profileDetails.appendChild(card);
+
+    profileContent.append(profileSidebar, profileDetails);
+    profileContainer.append(aiQuote, profileContent);
+
+    main.append(profileHeader, profileContainer);
+
 }
 
 export function renderSettings() {
