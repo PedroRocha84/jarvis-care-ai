@@ -46,7 +46,7 @@ header {
 }
 
 #main-content {
-
+    background-color: #8db2d6;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;

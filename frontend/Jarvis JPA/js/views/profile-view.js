@@ -32,9 +32,32 @@ export function renderProfile() {
 
     const aiQuote = document.createElement('div');
     aiQuote.className = 'aiquote';
-    const quote = document.createElement('h2');
-    quote.textContent = `"Embrace each day with courage; your strength is the light guiding you to healing."`;
-    aiQuote.appendChild(quote);
+
+    fetch('http://localhost:8080/jarvis/api/ai/quote', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) { 
+            throw new Error('Failed to fetch medicine data');
+        }
+        
+        return response.json(); // 🛠 important: return parsed JSON
+    })
+    .then(data => {
+        const aiQuote = document.querySelector('.aiquote'); 
+    
+        const quote = document.createElement('h2');
+        quote.textContent = data.quote; 
+        aiQuote.appendChild(quote);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+
+    
 
     const profileContent = document.createElement('div');
     profileContent.className = 'profile-content';
