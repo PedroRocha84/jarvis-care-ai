@@ -1,12 +1,5 @@
 import router from './router.js';
 
-const authState = {
-    isAuthenticated: false,
-    user: null
-};
-
-window.authState = authState;
-
 addEventListener('DOMContentLoaded', () => {
     init();
     router.start();
@@ -23,51 +16,44 @@ function init() {
 }
 
 function createHeader() {
-    const header = document.createElement('header');
-
-    const pageTitle = document.createElement('h1');
-    pageTitle.textContent = '';
-
-    const main = document.createElement('main');
-    main.id = 'main-content';
-
-   
-    header.appendChild(pageTitle);
-    header.appendChild(main);
+    const header = document.createElement('div');
+    header.classList.add("header");
+    header.id = "header";
 
     return header;
 }
 
 function createWrapper(){
+
+    const main = document.createElement('main');
+    main.id = 'main-content';
     
-    const wrapper = document.createElement('div');
-    wrapper.classList.add("footer")
+    const footer = document.createElement('div');
+    footer.classList.add("footer")
 
     const nav = document.createElement('nav');
     nav.classList.add('navbar');
 
-    wrapper.appendChild(nav);
+    const navHome = document.createElement("a");
+    navHome.href= "/";
+    navHome.textContent = "Home";
+    navHome.classList.add('active');
+    nav.appendChild(navHome);
 
+    const navSignIn = document.createElement("a");
+    navSignIn.href = "/signin";
+    navSignIn.textContent = "Sign In";
+    navSignIn.classList.add('active');
+    nav.appendChild(navSignIn);
 
-    nav.innerHTML = authState.isAuthenticated ? `
-        <a href="/profile">My Profile</a>
-        <a href="/dashboard">My Schedule</a>
-        <a href="/assistant">Care Assistant</a>
-        <a href="/logout">Logout</a>
-    ` : `
-        <a href="/">Home</a>
-        <a href="/signin">Sign In</a>
-
-        <a href="/register">Register</a>
-        <a href="/assistant">Care Assistant</a>
-    `;
+    const navRegister = document.createElement("a");
+    navRegister.href = "/register";
+    navRegister.textContent = "Register";
+    navRegister.classList.add('active');
+    nav.appendChild(navRegister);
     
-    nav.querySelectorAll('a').forEach(link => {
-        if (link.pathname === window.location.pathname) {
-            link.classList.add('active');
-        }
-    });
-  
+    main.appendChild(nav);
+    main.appendChild(footer);
 
-    return wrapper;
+    return main;
 }
