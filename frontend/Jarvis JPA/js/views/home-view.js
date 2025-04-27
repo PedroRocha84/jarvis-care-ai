@@ -50,8 +50,8 @@ export function render() {
     heroSection.appendChild(heroImage);
 
     const featuresSection = document.createElement('div');
-    featuresSection.id = 'learn-more';
     featuresSection.className = 'features-section';
+    featuresSection.id = 'learn-more';
 
     const featuresHeading = document.createElement('h3');
     featuresHeading.textContent = 'How CARE AI Helps You';

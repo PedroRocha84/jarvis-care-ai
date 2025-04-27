@@ -18,11 +18,11 @@ header {
 .navbar {
     display: flex;
     justify-content: center;
-    gap: 1rem;
     padding: 0.5rem 0;
     width: 100%;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
 .navbar a {
@@ -32,8 +32,13 @@ header {
     border-radius: 4px;
     transition: background-color 0.3s;
     font-weight: 500;
+    width: 100%;
 }
 
+.footer{
+    display: flex;
+    width: 95%;
+}
 
 .navbar a:hover {
     background-color: rgba(177, 212, 243, 0.445);
@@ -1621,6 +1626,8 @@ input:checked + .slider:before {
 
 /* Responsive Settings */
 @media (max-width: 768px) {
+
+
     .settings-container {
         padding: 1rem;
     }
@@ -1630,4 +1637,10 @@ input:checked + .slider:before {
         align-items: flex-start;
         gap: 0.5rem;
     }
+
+    body, html {
+        margin: 0;
+        padding: 0;
+      }
+      
 }
