@@ -1,39 +1,86 @@
 export function renderSignIn() {
-    const main = document.getElementById('wrapper');
-    main.innerHTML = `
-        <div class="auth-container">
-            <div class="brand-panel">
-                <img src="images/jarvis-logo4.png" alt="JARVIS AI">
-            </div>
+    const main = document.getElementById('main-content');
+    main.innerHTML = "";
+   
+    const authContainer = document.createElement('div');
+    authContainer.className = 'auth-container';
 
-            <div class="signin-container">
-                <h1>Sign In CARE AI</h1>
-                
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email">
-                </div>
-                
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password">
-                </div>
-                
-                <div class="options">
-                    <div class="remember">
-                        <input type="checkbox" id="remember">
-                        <label for="remember">Remember</label>
-                    </div>
-                    <a href="#" class="forgot-password">Forget Password?</a>
-                </div>
-                
-                <button class="signin-btn">SIGN IN</button>
-                <div class="create-account">
-                    Don't have Account? <a href="/register">Register</a>
-                </div>
-            </div>
-        </div>
-    `;
+    const brandPanel = document.createElement('div');
+    brandPanel.className = 'brand-panel';
+    const brandImg = document.createElement('img');
+    brandImg.src = 'images/jarvis-logo4.png';
+    brandImg.alt = 'JARVIS AI';
+    brandPanel.appendChild(brandImg);
+
+    const signinContainer = document.createElement('div');
+    signinContainer.className = 'signin-container';
+
+    const signinTitle = document.createElement('h1');
+    signinTitle.textContent = 'Sign In CARE AI';
+    signinContainer.appendChild(signinTitle);
+
+    const inputGroupEmail = document.createElement('div');
+    inputGroupEmail.className = 'input-group';
+    const emailLabel = document.createElement('label');
+    emailLabel.setAttribute('for', 'email');
+    emailLabel.textContent = 'Email';
+    const emailInput = document.createElement('input');
+    emailInput.type = 'email';
+    emailInput.id = 'email';
+    emailInput.name = 'email';
+    inputGroupEmail.append(emailLabel, emailInput);
+
+    const inputGroupPassword = document.createElement('div');
+    inputGroupPassword.className = 'input-group';
+    const passwordLabel = document.createElement('label');
+    passwordLabel.setAttribute('for', 'password');
+    passwordLabel.textContent = 'Password';
+    const passwordInput = document.createElement('input');
+    passwordInput.type = 'password';
+    passwordInput.id = 'password';
+    passwordInput.name = 'password';
+    inputGroupPassword.append(passwordLabel, passwordInput);
+
+    const options = document.createElement('div');
+    options.className = 'options';
+
+    const remember = document.createElement('div');
+    remember.className = 'remember';
+    const rememberInput = document.createElement('input');
+    rememberInput.type = 'checkbox';
+    rememberInput.id = 'remember';
+    const rememberLabel = document.createElement('label');
+    rememberLabel.setAttribute('for', 'remember');
+    rememberLabel.textContent = 'Remember';
+    remember.append(rememberInput, rememberLabel);
+
+    const forgotPasswordLink = document.createElement('a');
+    forgotPasswordLink.href = '#';
+    forgotPasswordLink.className = 'forgot-password';
+    forgotPasswordLink.textContent = 'Forget Password?';
+
+    options.append(remember, forgotPasswordLink);
+
+    const signinButton = document.createElement('button');
+    signinButton.className = 'signin-btn';
+    signinButton.textContent = 'SIGN IN';
+
+    const createAccount = document.createElement('div');
+    createAccount.className = 'create-account';
+    createAccount.innerHTML = `Don't have Account? <a href="/register">Register</a>`;
+
+    signinContainer.append(
+    inputGroupEmail,
+    inputGroupPassword,
+    options,
+    signinButton,
+    createAccount
+    );
+
+    authContainer.append(brandPanel, signinContainer);
+
+    main.appendChild(authContainer);
+
 }
 
 export function renderRegister() {
