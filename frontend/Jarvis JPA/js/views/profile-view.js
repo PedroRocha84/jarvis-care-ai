@@ -7,25 +7,32 @@ export function renderProfile() {
     const profileHeader = document.createElement('div');
     profileHeader.className = 'profile-header';
 
+    const greetingDiv = document.createElement('div');
     const greeting = document.createElement('h1');
     greeting.textContent = `Olá ${user.firstName},`;
-    profileHeader.appendChild(greeting);
+    greetingDiv.appendChild(greeting);
+    profileHeader.appendChild(greetingDiv);
+    
 
+    const viewMedicinesDiv = document.createElement('div');
     const viewMedicinesBtn = document.createElement('a');
     viewMedicinesBtn.href = '/medicines';
     viewMedicinesBtn.className = 'btn btn-primary';
     const medIcon = document.createElement('i');
     medIcon.className = 'fas fa-calendar-alt';
     viewMedicinesBtn.append(medIcon, ' View My Medicine');
+    viewMedicinesDiv.appendChild(viewMedicinesBtn);
 
+    const viewScheduleDiv = document.createElement('div');
     const viewScheduleBtn = document.createElement('a');
     viewScheduleBtn.href = '/dashboard';
     viewScheduleBtn.className = 'btn btn-primary';
     const schedIcon = document.createElement('i');
     schedIcon.className = 'fas fa-calendar-alt';
     viewScheduleBtn.append(schedIcon, ' View My Schedule');
+    viewScheduleDiv.appendChild(viewScheduleBtn);
 
-    profileHeader.append(viewMedicinesBtn, viewScheduleBtn);
+    profileHeader.append(viewMedicinesDiv, viewScheduleDiv);
 
     const profileContainer = document.createElement('div');
     profileContainer.className = 'profile-container';
@@ -58,7 +65,6 @@ export function renderProfile() {
     });
 
     
-
     const profileContent = document.createElement('div');
     profileContent.className = 'profile-content';
 
