@@ -7,20 +7,9 @@ addEventListener('DOMContentLoaded', () => {
 
 function init() {
     const app = document.getElementById('app');
-
-    const header = createHeader();
     const wrapper = createWrapper();
     
-    app.appendChild(header);
     app.appendChild(wrapper);
-}
-
-function createHeader() {
-    const header = document.createElement('div');
-    header.classList.add("header");
-    header.id = "header";
-
-    return header;
 }
 
 function createWrapper(){
@@ -52,8 +41,8 @@ function createWrapper(){
     navRegister.classList.add('active');
     nav.appendChild(navRegister);
     
-    main.appendChild(nav);
     main.appendChild(footer);
+    footer.appendChild(nav);
 
     return main;
 }

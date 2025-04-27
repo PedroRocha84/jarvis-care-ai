@@ -1,5 +1,5 @@
 export function render() {
-    const header = document.getElementById('header');
+
     const main = document.getElementById('main-content');
 
     const heroSection = document.createElement('div');
@@ -48,7 +48,6 @@ export function render() {
 
     heroSection.appendChild(heroContent);
     heroSection.appendChild(heroImage);
-
 
     const featuresSection = document.createElement('div');
     featuresSection.id = 'learn-more';
@@ -114,8 +113,8 @@ export function render() {
     awarenessContent.append(awarenessHeading, awarenessTitle, awarenessDesc, awarenessLink);
     awarenessSection.appendChild(awarenessContent);
 
-    header.appendChild(heroSection);
-    header.appendChild(featuresSection);
-    header.appendChild(awarenessSection);
+    main.appendChild(heroSection);
+    main.appendChild(featuresSection);
+    main.appendChild(awarenessSection);
 
 }

@@ -1,5 +1,5 @@
 export function renderSignIn() {
-    const main = document.getElementById('main-content');
+    const main = document.getElementById('wrapper');
     main.innerHTML = `
         <div class="auth-container">
             <div class="brand-panel">
