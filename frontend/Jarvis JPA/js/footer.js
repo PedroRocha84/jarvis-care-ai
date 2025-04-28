@@ -26,6 +26,12 @@ export function createFooter(){
     navRegister.classList.add('active');
     nav.appendChild(navRegister);
     
+    const navCareAssistant = document.createElement("a");
+    navRegister.href = "/careassistant";
+    navRegister.textContent = "Care Assistant";
+    navRegister.classList.add('active');
+    nav.appendChild(navCareAssistant);
+
     main.appendChild(footer);
     footer.appendChild(nav);
 
