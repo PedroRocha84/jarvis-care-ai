@@ -45,6 +45,7 @@ public class LoginController {
                 responseBody.put("id", internalUser.getId());
                 responseBody.put("email", internalUser.getEmail());
                 responseBody.put("firstName", internalUser.getFirstname());
+                responseBody.put("lastName", internalUser.getLastname());
 
                 return new ResponseEntity<>(responseBody, HttpStatus.OK);
             } else {

@@ -180,10 +180,10 @@ export async function handleSignIn() {
         
         const data = await response.json(); // ✅ Expecting JSON from server
 
-        const { id,firstName, email: userEmail } = data;
+        const { id,firstName, lastName, email: userEmail } = data;
         
         // Store user info in session or local storage
-        const user = { id, firstName, email: userEmail };
+        const user = { id, firstName, lastName, email: userEmail };
         sessionStorage.setItem('user', JSON.stringify(user));
 
         // Optional: global state
