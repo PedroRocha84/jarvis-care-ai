@@ -1,4 +1,7 @@
 export function renderMedicineInfo(viewType = 'daily') {
+    const temp = document.getElementById('main-content');
+    temp.innerHTML = '';
+
     const main = document.getElementById('main-content');
     const user = window.authState.user || {};
     const today = new Date();
@@ -123,8 +126,8 @@ export function renderMedicineInfo(viewType = 'daily') {
                 ` : ''}
 
                 <div class="quick-actions">
-                    <button class="quick-action-btn" data-action="new-appointment">
-                        <i class="fas fa-plus"></i> Add Medicine
+                    <button class="quick-action-btn" data-action="new-appointment" href='/medicines/add'">
+                        Add Medicine
                     </button>
                 </div>
             </div>

@@ -39,6 +39,10 @@ export default {
         path: '/medicines',
         controller: 'medicineinfo-controller'
     },
+    addMedicine:{
+        path:'/medicines/add',
+        controller: 'medicineadd-controller'
+    },
     health: {
         path: '/health',
         controller: 'health-controller'

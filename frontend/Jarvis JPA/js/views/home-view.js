@@ -18,7 +18,7 @@ export function render() {
 
     const heroDescription = document.createElement('p');
     heroDescription.className = 'hero-description';
-    heroDescription.textContent = 'AI-powered healthcare solutions for better well-being';
+    heroDescription.textContent = 'You Health buddy with AI technology that helps cancer treatment experience.';
     heroContent.appendChild(heroDescription);
 
     const ctaButtons = document.createElement('div');

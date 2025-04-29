@@ -34,16 +34,14 @@ function setupMedicineInfoListeners() {
             e.target.closest('.quick-action-btn')) {
             const action = e.target.getAttribute('data-action') || 
                          e.target.closest('.quick-action-btn').getAttribute('data-action');
-            handleQuickAction(action);
+            addMedicine(action);
         }
         
     });
 }
 
 
-function showEditMedicine(eventId) {
-    alert(`Showing edit for event ${eventId}`);
-}
+
 
 function removeMedicine(eventId) {
     if (confirm('Are you sure you want to remove this medicine?')) {
@@ -53,7 +51,8 @@ function removeMedicine(eventId) {
     }
 }
 
-function handleQuickAction(action) {  
-    alert('Redirecting to new new medicine form');
-    // window.location.href = '/new-medicine';
+function addMedicine(action) {  
+    
+    window.history.pushState({}, '', '/medicines/add');
+    window.dispatchEvent(new PopStateEvent('popstate'));
 }

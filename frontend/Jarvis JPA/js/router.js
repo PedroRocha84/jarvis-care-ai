@@ -7,15 +7,17 @@ function start() {
     addEventListener('popstate', handlePopState);
 }
 
-function navigate(path, firstLoad = false) {
+function navigate(path, shouldReplace = false, shouldPush = true) {
     const routeKey = Object.keys(routes).find(key => routes[key].path === path);
     const route = routeKey ? routes[routeKey] : routes.home;
 
     setCurrentRoute(route);
 
-    firstLoad
-        ? history.replaceState(route, '', route.path)
-        : history.pushState(route, '', route.path);
+    if (shouldPush) {
+        shouldReplace
+            ? history.replaceState(route, '', route.path)
+            : history.pushState(route, '', route.path);
+    }
 
     initializeController(route.controller);
 }
@@ -26,6 +28,7 @@ function setCurrentRoute(route) {
 }
 
 async function initializeController(controllerName) {
+    console.log(controllerName);
     try {
         const controllerModule = await import(`./controllers/${controllerName}.js`);
         if (typeof controllerModule.init === 'function') {
@@ -51,7 +54,6 @@ function setAnchorEventListener() {
 
 function handlePopState(event) {
     const path = event.state?.path || window.location.pathname;
-    navigate(path);
+    navigate(path, false, false); // Don't pushState again during back/forward
 }
-
 export default { start };
