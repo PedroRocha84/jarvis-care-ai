@@ -7,7 +7,7 @@ export function renderHealthDashboard() {
             <div class="health-header">
                 <h1>Health Dashboard</h1>
                 <p>Welcome back, ${user.firstName || 'User'}. Here's your health overview.</p>
-                <a href="/profile/medical" class="btn btn-primary">
+                <a href="#" class="btn btn-primary">
                     <i class="fas fa-heartbeat"></i> View Medical Profile
                 </a>
             </div>
