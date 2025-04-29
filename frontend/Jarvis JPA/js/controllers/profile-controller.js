@@ -15,7 +15,7 @@ export function init() {
         setupProfileListeners();
     } else if (path === '/profile/settings') {
         renderSettings();
-        setupSettin
+        
     }
         createFooter();
 }
