@@ -24,12 +24,12 @@ async function handleUserMessage() {
         addMessage(question, true);
         input.value = '';
         
-        // Show loading indicator
+      
         const loadingMsg = addMessage("Thinking...", false);
         
         try {
             const response = await queryAssistantAPI(question);
-            // Remove loading message
+            
             document.getElementById('chat-container').removeChild(loadingMsg);
             
             if (response.answer) {
@@ -46,15 +46,15 @@ async function handleUserMessage() {
 }
 
 async function queryAssistantAPI(question) {
-    // Replace with your actual API endpoint
-    const API_URL = 'http://localhost:8080/jarvis/api/assistant';
+    
+    const API_URL = 'http://localhost:8080/jarvis/api/ai/careassistant';
     
     try {
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${window.authState.token || ''}`
+                'Authorization': `Bearer ${window.authState?.token || ''}`
             },
             body: JSON.stringify({
                 question: question,

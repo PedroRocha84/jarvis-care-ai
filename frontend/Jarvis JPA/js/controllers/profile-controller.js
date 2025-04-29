@@ -1,4 +1,5 @@
 import { renderProfile, renderSettings } from '../views/profile-view.js';
+import { createFooter } from '../footer.js';
 
 export function init() {
     if (!window.authState.isAuthenticated) {
@@ -14,8 +15,9 @@ export function init() {
         setupProfileListeners();
     } else if (path === '/profile/settings') {
         renderSettings();
-        setupSettingsListeners();
+        setupSettin
     }
+        createFooter();
 }
 
 function setupProfileListeners() {

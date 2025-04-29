@@ -19,6 +19,7 @@ export function renderAssistant() {
     `;
 }
 
+
 export function addMessage(content, isUser = false) {
     const chatContainer = document.getElementById('chat-container');
     const messageDiv = document.createElement('div');
@@ -29,6 +30,7 @@ export function addMessage(content, isUser = false) {
     `;
     chatContainer.appendChild(messageDiv);
     chatContainer.scrollTop = chatContainer.scrollHeight;
+    return messageDiv;
 }
 
 export function showContactPrompt() {
