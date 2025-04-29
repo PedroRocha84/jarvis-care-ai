@@ -8,6 +8,7 @@ export function renderProfile() {
     profileHeader.className = 'profile-header';
 
     const greetingDiv = document.createElement('div');
+    greetingDiv.classList.add("firstname");
     const greeting = document.createElement('h1');
     greeting.textContent = `Olá ${user.firstName},`;
     greetingDiv.appendChild(greeting);

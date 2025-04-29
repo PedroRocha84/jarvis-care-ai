@@ -45,6 +45,8 @@ header {
     color: rgb(192, 185, 185);
 }
 
+
+
 #main-content {
     background-color: #8db2d6;
     max-width: 1200px;
@@ -678,8 +680,15 @@ header {
 .profile-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items:start;
   margin-bottom: 2rem;
+  width: 90%;
+  
+}
+
+.firstname{
+    width: 65%;
+    
 }
 
 .profile-content {
