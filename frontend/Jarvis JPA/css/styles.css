@@ -1001,3 +1001,132 @@ header {
     line-height: 1.6;
     margin: 0;
 }
+
+/* Mood Tracker Styles */
+.mood-tracker-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.mood-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.mood-header h1 {
+    color: #2c3e50;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.mood-header p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+#mood-form {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.mood-options {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.mood-option {
+    flex: 1;
+    min-width: 100px;
+    cursor: pointer;
+}
+
+.mood-option input[type="radio"] {
+    display: none;
+}
+
+.mood-option input[type="radio"]:checked + .mood-icon {
+    background: #f0f4ff;
+    border: 2px solid #6e8efb;
+}
+
+.mood-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.mood-icon:hover {
+    background: #f8f9fa;
+}
+
+.mood-icon i {
+    font-size: 2rem;
+}
+
+.mood-icon i.fa-grin-stars { color: #4bc0c0; }
+.mood-icon i.fa-smile { color: #6e8efb; }
+.mood-icon i.fa-meh { color: #ffcc5c; }
+.mood-icon i.fa-frown { color: #ff9966; }
+.mood-icon i.fa-sad-tear { color: #ff6b6b; }
+
+.mood-icon span {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 600;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.mood-history {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.mood-history h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mood-chart {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: #666;
+}
