@@ -34,7 +34,7 @@ function setupProfileListeners() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const path = e.target.getAttribute('href');
-            window.history.pushState({}, '', path);
+            window.history.pushState({}, '', '/profile');
             window.dispatchEvent(new PopStateEvent('popstate'));
         });
     });
