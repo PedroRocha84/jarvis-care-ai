@@ -130,7 +130,7 @@ export function renderProfile() {
     const labelName = document.createElement('label');
     labelName.textContent = 'Full Name';
     const nameValue = document.createElement('p');
-    nameValue.textContent = user.name || 'Not specified';
+    nameValue.textContent = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Not specified';
     detailItem1.append(labelName, nameValue);
 
     const detailItem2 = document.createElement('div');
