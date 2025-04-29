@@ -1,6 +1,8 @@
 import { renderMedicineInfo } from '../views/medicineinfo-view.js';
 
 export function init() {
+    const temp = document.getElementById('main-content');
+    temp.innerHTML = '';
     renderMedicineInfo('daily');
     setupMedicineInfoListeners();
 }

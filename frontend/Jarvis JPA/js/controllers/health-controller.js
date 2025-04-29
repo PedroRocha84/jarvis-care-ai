@@ -2,6 +2,9 @@ import { renderHealthDashboard, renderMoodTracker } from '../views/health-view.j
 
 export function init() {
     const path = window.location.pathname;
+
+    const temp = document.getElementById('main-content');
+    temp.innerHTML = '';
     
     if (path === '/health') {
         renderHealthDashboard();

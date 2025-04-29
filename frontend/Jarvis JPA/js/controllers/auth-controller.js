@@ -2,6 +2,8 @@ import { renderSignIn, renderRegister, handleSignIn } from '../views/auth-view.j
 
 export function init() {
     const path = window.location.pathname;
+    const temp = document.getElementById('main-content');
+    temp.innerHTML = '';
     
     if (path === '/signin') {
         renderSignIn();

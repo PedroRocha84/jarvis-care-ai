@@ -1,6 +1,9 @@
 import { renderDashboard } from '../views/dashboard-view.js';
 
 export function init() {
+    const temp = document.getElementById('main-content');
+    temp.innerHTML = '';
+    
     renderDashboard('daily');
     setupDashboardListeners();
 }

@@ -1,6 +1,8 @@
 import { renderAssistant, addMessage, showContactPrompt } from '../views/assistant-view.js';
 
 export function init() {
+    const temp = document.getElementById('main-content');
+    temp.innerHTML = '';
     renderAssistant();
     setupEventListeners();
     addMessage("Hello! I'm your Care Assistant. How can I help you today?");

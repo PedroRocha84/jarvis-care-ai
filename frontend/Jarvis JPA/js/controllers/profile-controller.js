@@ -2,6 +2,8 @@ import { renderProfile, renderSettings } from '../views/profile-view.js';
 import { createFooter } from '../footer.js';
 
 export function init() {
+    const temp = document.getElementById('main-content');
+    temp.innerHTML = '';
     if (!window.authState.isAuthenticated) {
         window.history.pushState({}, '', '/signin');
         window.dispatchEvent(new PopStateEvent('popstate'));

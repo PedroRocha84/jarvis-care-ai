@@ -1,6 +1,8 @@
 import { renderMedicineForm } from "../views/medicine-form";
 
 export function init() {
+    const temp = document.getElementById('main-content');
+    temp.innerHTML = '';
     renderMedicineForm();
     setupMedicineFormListeners();
 }
