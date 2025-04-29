@@ -54,7 +54,7 @@ async function queryAssistantAPI(question) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${window.authState.token || ''}`
+                'Authorization': `Bearer ${window.authState?.token || ''}`
             },
             body: JSON.stringify({
                 question: question,

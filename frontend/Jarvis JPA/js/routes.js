@@ -12,7 +12,7 @@ export default {
         controller: 'auth-controller'
     },
     assistant: {
-        path: '/assistant',
+        path: '/careassistant',
         controller: 'assistant-controller'
     },
     register: {
