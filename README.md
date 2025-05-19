@@ -91,7 +91,7 @@ src/
 ├── main/
 │   ├── java
 │   │   ├── com.jarviscare.you/
-I   │   │   ├── controllers/
+|   │   │   ├── controllers/
 │   │   │   ├── converters/
 │   │   │   ├── dtos/
 │   │   │   ├── errors/
