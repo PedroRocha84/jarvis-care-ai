@@ -86,6 +86,31 @@ Our focus was on addressing the **lack of reliable information in healthcare**, 
 
 ## 📁 Project Structure
 
+```bash
+src/
+├── main/
+│   ├── java
+│   │   ├── com.jarviscare.you/
+I   │   │   ├── controllers/
+│   │   │   ├── converters/
+│   │   │   ├── dtos/
+│   │   │   ├── errors/
+│   │   │   ├── exceptions/
+│   │   │   ├── factories/
+│   │   │   ├── model/
+│   │   │   ├── persistence/
+│   │   │   ├── services/
+|   │   ├── resources/
+│   │   │   ├── ai/
+|   │   │   │   ├── rag/
+|   │   │   │   ├── templates/
+│   │   │   ├── db/
+|   │   │   │   ├── config.properties/
+│   │   ├── webapp
+│   │   │   ├── WEB-INF
+|   │   │   │   └── spring
+```
+
 ---
 
 ## 👥 Team & Credits
