@@ -1,3 +1,8 @@
+<img src="https://github.com/user-attachments/assets/e5a1d049-e392-4112-acf6-c1546b943f91" width="800"/>
+<img src="https://github.com/user-attachments/assets/fec67b0c-a151-4259-98a7-88be53fb3eae" width="800"/>
+
+
+
 # 💊 Jarvis Care AI
 
 **Jarvis Care AI** is an interactive single-page web application inspired by *Jarvis* from *Iron Man*. It assists patients throughout their treatment journey by offering medication tracking, appointment management, and a smart AI-powered chatbot to answer medical questions — all built around an MVP designed and delivered in two weeks.
