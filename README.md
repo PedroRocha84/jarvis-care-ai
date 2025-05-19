@@ -86,16 +86,6 @@ Our focus was on addressing the **lack of reliable information in healthcare**, 
 
 ## 📁 Project Structure
 
-jarvis-care-ai/
-
-├── backend/
-│ ├── src/
-│ │ ├── controller/
-│ │ ├── service/
-│ │ ├── model/
-│ │ └── dto/
-├── docs/
-└── README.md
 ---
 
 ## 👥 Team & Credits
